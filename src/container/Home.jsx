@@ -7,17 +7,15 @@ import Login from "../components/Login.js";
 import Image from "../components/Image.js";
 import Footer from "../components/Footer.js";
 
-var buttons =[
-    {
-        message:"GET YOUR ACTIVATION CODE",
-        button:"Login with Github",
-        id:1,
-    },{
-        message:"NEED ANY HELP?",
-        button:"Contact Organiser",
-        id:2,
-    }
-]
+// const buttons =[
+//     {
+//         message:"GET YOUR ACTIVATION CODE",
+//         button:"Login with Github"
+//     },{
+//         message:"NEED ANY HELP?",
+//         button:"Contact Organiser"
+//     }
+// ]
 
 function Home(){
 return (
@@ -29,10 +27,7 @@ return (
         <Image />
     </div>
     <div className="p-4">
-        <div className="row">
-            {posts.map((post) => {
-                return <Login message={post.message} button />
-            })}
+        <div className="row"> 
             <Login  message={"LOGIN"} button={"Login With Github"}/>
             <Login message={"NEED ANY HELP?"} button={"Contact Organisar"}/>
         </div>
