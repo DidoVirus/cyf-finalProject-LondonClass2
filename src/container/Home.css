@@ -1,0 +1,15 @@
+body{
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+img{
+    height: 400px;
+    width: 800px;
+    border-color: red;
+    border-width: 5px;
+}
+border {
+    border-width: 20px;
+}
