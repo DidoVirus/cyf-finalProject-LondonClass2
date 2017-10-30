@@ -7,6 +7,6 @@ import Header from './components/Header';
 import Home from './container/Home.jsx';
 import Activation from './container/Activation.jsx';
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+ReactDOM.render(<Activation />, document.getElementById('root'));
 
 registerServiceWorker();

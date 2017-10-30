@@ -12,18 +12,21 @@ return (
     <div>
         <Header title={"CONVIENT"}/>
     </div>
-    <div>
-        <h2 lassName="p-3">VERIFICATION</h2>
-        <p>Please enter your verification code to complete your registration.if you haven't been given a code yet.</p><p className="text-primary">please contact the organisers.</p>
-    </div>
-    <div className="p-5">
-        <Input />
-    </div>
-    <div className="col-md-6">
-        <Button  button={"submit"}/>
-    </div>
-    <div>
-        <Footer />
+    <div className="pl-5">
+        <div className="pl-4">
+            <h2 className="p-4">VERIFICATION</h2>
+            <p className="p-4">Please enter your verification code to complete your registration.if you haven't been given a code yet.</p>
+            <a className="text-primary pl-4">please contact the organisers.</a>
+        </div>
+        <div className="p-4 form-group col-md-4 input">
+            <Input />
+        </div>
+        <div className="col-md-4 pl-4 submit pb-5">
+            <Button  button={"submit"}/>
+        </div>
+        <div>
+            <Footer />
+        </div>
     </div>
 </div>
 )}
