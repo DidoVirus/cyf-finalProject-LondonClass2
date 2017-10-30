@@ -3,7 +3,7 @@
 The most intelligent matchmaking system for mentors and students that maximises convenience and minimises waste.
 
 ## Database
-![ERD] (https://raw.githubusercontent.com/DidoVirus/cyf-finalProject-LondonClass2/master/database/schema.png) 
+![ERD](https://raw.githubusercontent.com/DidoVirus/cyf-finalProject-LondonClass2/master/database/schema.png) 
 
 ### Import database 
 
