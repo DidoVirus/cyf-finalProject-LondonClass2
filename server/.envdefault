@@ -1,0 +1,5 @@
+DB_PASSWORD=*****
+DB_PORT=5432
+DB_DATABASE=convenient_db
+DB_HOST=localhost
+DB_USER=postgres
