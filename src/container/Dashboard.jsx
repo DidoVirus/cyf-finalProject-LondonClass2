@@ -4,9 +4,8 @@ import "./Home.css";
 import Button from "../components/Button.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
-import Input from "../components/Input.js";
 
-function Activation(){
+function Dashboard(){
 return (
 <div className="container-fluid border border-dark rounded p-2">
     <div>
@@ -14,15 +13,15 @@ return (
     </div>
     <div className="pl-5">
         <div className="pl-4">
-            <h2 className="p-4">VERIFICATION</h2>
-            <p className="p-4">Please enter your verification code to complete your registration.if you haven't been given a code yet.</p>
-            <a className="text-primary pl-4">please contact the organisers.</a>
+            <h2 className="p-4">DASHBOARD</h2>
+            <p className="p-4">You have no upcoming meeting conformed.</p>
+            <a className="text-primary pl-4">Please Book here</a>
         </div>
-        <div className="p-4 form-group col-md-4 input">
-            <Input />
+        <div className="col-md-5 submit pb-5">
+            <Button button={"Book a meeting"} />
         </div>
-        <div className="col-md-4 pl-4 submit pb-5">
-            <Button  button={"submit"}/>
+        <div className="col-md-5  submit pb-5">
+            <Button  button={"Mark availability"}/>
         </div>
         <div>
             <Footer />
@@ -31,4 +30,4 @@ return (
 </div>
 )}
 
-export default Activation;
+export default Dashboard;
