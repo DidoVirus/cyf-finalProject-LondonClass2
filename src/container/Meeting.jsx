@@ -4,10 +4,8 @@ import "./Home.css";
 import Calender from "../components/Calender.js";
 import Header from "../components/Header.js";
 import InputLg from "../components/InputLg.js";
-import TimeForm from "../components/TimeForm.js";
 import Footer from "../components/Footer.js";
-import DatePickerDialog from 'material-ui/DatePicker/DatePickerDialog';
-
+import Button from "../components/Button.js";
 
 
 function Meeting(){
@@ -28,7 +26,9 @@ return (
             <div className="p-4">
                 <div className="row"> 
                     <Calender />
-                    <TimeForm />
+                </div>
+                <div className="submit pb-5">
+                    <Button button={"SUBMIT"}/>
                 </div>
             </div>
         </div>
