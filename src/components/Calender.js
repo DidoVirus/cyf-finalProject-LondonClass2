@@ -9,12 +9,12 @@ class Demo extends React.Component {
     state = {
         dateTime: null
     }
-    
+
     setDate = (dateTime) => this.setState({ dateTime })
-    
+
     render() {
         return (
-        <DateTimePicker 
+        <DateTimePicker
             onChange={this.setDate}
             DatePicker={DatePickerDialog}
             TimePicker={TimePickerDialog}
@@ -22,7 +22,7 @@ class Demo extends React.Component {
         );
     }
 }
- 
+
 );
 
 export default Calender;

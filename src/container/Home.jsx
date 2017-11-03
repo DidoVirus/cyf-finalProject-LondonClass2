@@ -27,7 +27,7 @@ return (
         <Image />
     </div>
     <div className="p-4">
-        <div className="row"> 
+        <div className="row">
             <Login  message={"LOGIN"} button={"Login With Github"}/>
             <Login message={"NEED ANY HELP?"} button={"Contact Organisar"}/>
         </div>

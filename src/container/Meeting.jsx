@@ -26,7 +26,7 @@ return (
         </div>
         <div className="pl-4">
             <div className="p-4">
-                <div className="row"> 
+                <div className="row">
                     <Calender />
                     <TimeForm />
                 </div>
