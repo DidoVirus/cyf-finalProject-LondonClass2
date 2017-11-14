@@ -57,7 +57,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE meeting_request (
-    meeting_request_id integer NOT NULL,
+    meeting_request_id serial NOT NULL,
     user_id integer,
     subject text,
     week_commencing date
@@ -69,7 +69,7 @@ CREATE TABLE meeting_request (
 --
 
 CREATE TABLE slots (
-    slot_id integer NOT NULL,
+    slot_id serial NOT NULL,
     user_id integer,
     start_timestamp timestamp without time zone,
     note text
@@ -81,7 +81,7 @@ CREATE TABLE slots (
 --
 
 CREATE TABLE users (
-    user_id integer NOT NULL,
+    user_id serial NOT NULL,
     github_id text,
     github_name text,
     github_username text,
@@ -150,4 +150,3 @@ ALTER TABLE ONLY meeting_request
 --
 -- PostgreSQL database dump complete
 --
-

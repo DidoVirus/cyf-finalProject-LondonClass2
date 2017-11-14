@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>convient app</title>
+        <title>Login</title>
         <style>
             body{
                 font-family: arial;
@@ -36,6 +36,13 @@
                 padding: 0 10px;
                 color: #333;
             }
+            .github-btn{
+                color: #fff;
+                text-decoration: none;
+                font-size: 18px;
+                padding: 10px;
+                background: #ff5353;
+            }
         </style>
     </head>
     <body>
@@ -47,12 +54,13 @@
             </ul>
         </nav>
         <header>
-            <h1>conveint app</h1>
-            <a href="mailto:email@address.com">Click to email</a>
-            <h2>Homepage</h2>
+            <h1>WHAT IS YOUR VERIFICATION CODE</h1>
         </header>
         <main>
-            <p>conveint mentor to student app:)</p>
+          <form action="/auth/verif" method="post">
+            <input type="text" name="id">
+            <button class="github-btn" type="submit">Submit</button>
+          </form>
         </main>
     </body>
 </html>
