@@ -13,3 +13,9 @@ img{
 border {
     border-width: 20px;
 }
+.input{
+    margin-left: 420px;
+}
+.submit{
+    margin-left: 550px
+}
