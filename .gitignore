@@ -1,4 +1,4 @@
 node_modules/
 .env
-keys
-views
+config/keys.js
+server/views
