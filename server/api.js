@@ -6,6 +6,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const passportSetup = require('../config/passport-setup');
 var authRoutes = require('../routes/auth-routes');
+var dashBoardRoutes = require('../routes/dashBoard-routes');
 var keys = require('../config/keys');
 var ejs = require('ejs');
 
@@ -31,11 +32,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //calling the home router
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home',{ user: req.user });
 });
 
 //using the auth for routes
 app.use('/auth', authRoutes);
+app.use('/dashBoard', dashBoardRoutes);
 
 //setting up port
 app.listen(process.env.PORT || 2500, function () {

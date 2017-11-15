@@ -22,13 +22,17 @@ router.get('/github', passport.authenticate('github', {
 
 //auth verif to return the verification page
 router.get('/verif', function(req, res, next) {
-  res.render('verif')
+  res.render('verif',{ user: req.user })
 });
 
-//rendering the dashboard
-router.get('/dashBoard', function(req, res, next) {
-  res.render('dashBoard')
+router.get('/verifAgain', function(req, res, next) {
+  res.render('verifAgain',{ user: req.user })
 });
+
+// //rendering the dashboard
+// router.get('/dashBoard', function(req, res, next) {
+//   res.render('dashBoard')
+// });
 
 //auth verif to capture what the user verification code
 router.post('/verif', function(req, res) {
@@ -47,7 +51,10 @@ router.post('/verif', function(req, res) {
         }
     //updating the user table with user verification code
         else {
-          if(user.rowCount){
+          if (!user.rowCount){
+            res.redirect('/auth/verifAgain');
+          }
+          else{
               console.log(user.rows[0])
                 var studentValue = user.rows[0].role_student;
                 var mentorValue = user.rows[0].role_mentor;
@@ -61,12 +68,14 @@ router.post('/verif', function(req, res) {
             if(error){
               return console.log('am the ',error);
             }
+            else{
+              res.redirect('/dashBoard/');
+            }
         };
     };
 
 });
 };
-res.redirect('/auth/dashBoard');
 });
 });
 

@@ -46,7 +46,7 @@ passport.use(new GitHubStrategy({
       //checking if the user already exits or not
       else {
         db.query('SELECT * FROM users WHERE github_id = $1',[profile.id],(error, user)=>{
-          console.log("Selecting user from DB");
+          console.log("Selecting user from DB",profile);
           done2();
           const currentUser = user.rows[0];
           console.log(user);

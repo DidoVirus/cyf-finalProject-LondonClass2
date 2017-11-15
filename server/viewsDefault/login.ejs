@@ -48,9 +48,12 @@
     <body>
         <nav>
             <ul>
-                <li><a href="/auth/logout">Logout</a></li>
-                <li><a href="/auth/login">Login</a></li>
-                <li><a href="/">Homepage</a></li>
+              <% if (user) { %>
+              <li><a href="/auth/logout">Log out</a></li>
+              <% } else { %>
+              <li><a href="/auth/login">Login</a></li>
+              <% } %>
+              <li><a href="/">Homepage</a></li>
             </ul>
         </nav>
         <header>
@@ -58,6 +61,10 @@
         </header>
         <main>
             <a class="github-btn" href="/auth/github">Github</a>
+            <br><br><br>
+            <p>Talk to organiser if you cant login with github</p>
+            <a class="github-btn" href="mailto:raymossekandi@gmail.com">ORGANISER</a>
         </main>
+
     </body>
 </html>
