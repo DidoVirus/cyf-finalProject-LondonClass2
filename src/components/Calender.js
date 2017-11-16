@@ -1,60 +1,54 @@
-import React from "react";
+import React, { Component } from "react";
 import Button from "./Button.js";
-import TimePicker from 'react-bootstrap-time-picker';
+import CalenderButton from "./CalenderButton.js";
 
-function Calender(props){
-    return(
-        <table class="table table-responsive">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>SUNDAY</th>
-                    <th>MONDAY</th>
-                    <th>TUESDAY</th>
-                    <th>WEDNESDAY</th>
-                    <th>THURSDAY</th>
-                    <th>FRIDAY</th>
-                    <th>SATURDAY</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">MORNING</th>
-                    {/* <td> <TimePicker start="8:00" end="21:00" step={30} /></td> */}
-                    <td><button type="button" class="btn btn-outline-primary">8AM-12PM</button></td>
-                    <td><button type="button" class="btn btn-outline-primary">8AM-12PM</button></td>
-                    <td><button type="button" class="btn btn-outline-primary">8AM-12PM</button></td>
-                    <td><button type="button" class="btn btn-outline-primary">8AM-12PM</button></td>
-                    <td><button type="button" class="btn btn-outline-primary">8AM-12PM</button></td>
-                    <td><button type="button" class="btn btn-outline-primary">8AM-12PM</button></td>
-                    <td><button type="button" class="btn btn-outline-primary">8AM-12PM</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">AFTERNOON</th>
-                    <td><button type="button" class="btn btn-outline-success">12PM-6PM</button></td>
-                    <td><button type="button" class="btn btn-outline-success">12PM-6PM</button></td>
-                    <td><button type="button" class="btn btn-outline-success">12PM-6PM</button></td>
-                    <td><button type="button" class="btn btn-outline-success">12PM-6PM</button></td>
-                    <td><button type="button" class="btn btn-outline-success">12PM-6PM</button></td>
-                    <td><button type="button" class="btn btn-outline-success">12PM-6PM</button></td>
-                    <td><button type="button" class="btn btn-outline-success">12PM-6PM</button></td>
-                    
-                </tr>
-                <tr>
-                    <th scope="row">EVENING</th>
-                    <td><button type="button" class="btn btn-outline-danger">6PM-9PM</button></td>
-                    <td><button type="button" class="btn btn-outline-danger">6PM-9PM</button></td>
-                    <td><button type="button" class="btn btn-outline-danger">6PM-9PM</button></td>
-                    <td><button type="button" class="btn btn-outline-danger">6PM-9PM</button></td>
-                    <td><button type="button" class="btn btn-outline-danger">6PM-9PM</button></td>
-                    <td><button type="button" class="btn btn-outline-danger">6PM-9PM</button></td>
-                    <td><button type="button" class="btn btn-outline-danger">6PM-9PM</button></td>
-                   
-                </tr>
-        </tbody>
-       </table>
-       
-    )}
+class Calender extends Component {
+    constructor(props) {
+        super(props);
 
+    }
+
+    period = () => {
+        if(document.getElementsByClassName('periodOfDay')){
+            return "MORNING";
+        } else if(this.time ="12PM-6PM"){
+            return "AFTERNOON";
+        } {
+            return "EVENING";
+        }
+    }
+
+
+    render() {
+        const noDays = 7;
+        const dayInTheWeek = ["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY"];
+        const timeInDay=["9AM-12PM","12PM-6PM","6PM-8PM"];
+
+        
+      return(
+        <table className="table table-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                {dayInTheWeek.map((day)=>{
+                    return <th>{day}</th>;
+                })}
+            </tr>
+        </thead>
+        <tbody>
+            {timeInDay.map((time) =>{
+                return <tr>
+                    <th className="periodOfDay" scope="row">{this.period()}</th>
+                    {dayInTheWeek.map((day)=>{
+                    return   <td><CalenderButton  day={day} value={time} booked={false}/></td>;
+                })}
+                   </tr> 
+
+            })}
+    </tbody>
+   </table>
+      );
+    }
+}
 
 export default Calender;
