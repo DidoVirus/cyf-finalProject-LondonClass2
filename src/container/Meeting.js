@@ -6,10 +6,26 @@ import Header from "../components/Header.js";
 import InputLg from "../components/InputLg.js";
 import Footer from "../components/Footer.js";
 import Button from "../components/Button.js";
+import { Form, FormControl } from 'react-bootstrap';
 
 
-function Meeting(){
-return (
+class Meeting extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { collectedData: null };
+        this.getData = this.getData.bind(this);
+    }
+
+    // ComponentWillMount() {
+
+    // }
+    getData(data) {
+        this.setState({
+            collectedData: Object.assign({},data),
+        });
+    }
+render () {
+    return ( 
 <div className="container-fluid border border-dark rounded p-4">
     <div>
         <Header title={"CONVENIENT"}/>
@@ -25,10 +41,10 @@ return (
         <div className="pl-4">
             <div className="p-4">
                 <div className="row"> 
-                    <Calender />
+                    <Calender getData={ this.getData }/>
                 </div>
                 <div className="submit pb-5">
-                    <Button button={"SUBMIT"}/>
+                    <Button  onClick={ () => console.log( this.state.collectedData) } button={"SUBMIT"} />
                 </div>
             </div>
         </div>
@@ -37,6 +53,8 @@ return (
         </div>
     </div>
 </div>
-)}
+    )
+}
 
+}
 export default Meeting;

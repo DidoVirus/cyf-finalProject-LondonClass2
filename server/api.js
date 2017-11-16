@@ -40,8 +40,14 @@ pool.connect((error, db, done)=>{
 //initialize the bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-headers', 'Origin, X-Requested-With, Content-Type, Accept');
+});
 //initialize the passport
-
+app.get('/add',(req, res, next) => {
+  res.send('hi');
+});
 app.use(passport.initialize());
 app.use(passport.session());
+
