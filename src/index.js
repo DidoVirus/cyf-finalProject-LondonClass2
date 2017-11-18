@@ -11,6 +11,6 @@ import Meeting from './container/Meeting.jsx';
 
 
 
-ReactDOM.render(<Meeting />, document.getElementById('root'));
+ReactDOM.render(<Home />, document.getElementById('root'));
 
 registerServiceWorker();

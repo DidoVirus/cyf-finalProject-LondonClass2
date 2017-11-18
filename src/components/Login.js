@@ -6,7 +6,7 @@ function Login(props){
         <div className="col col-md-6 text-center">
             <h3 className="text-center">{props.message}</h3>
             <hr />
-            <Button onClick="https://github.com/login" button={props.button}/>
+            <Button onClick="http://localhost:2500/auth/github" button={props.button}/>
         </div>
     )}
     export default Login;

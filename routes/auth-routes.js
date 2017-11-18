@@ -37,7 +37,7 @@ router.get('/verifAgain', function(req, res, next) {
 //auth verif to capture what the user verification code
 router.post('/verif', function(req, res) {
   var verifCode =req.body.id;// storing the user verification code in variable
-
+console.log('this the number',verifCode)
   //connecting to database to check verification_codes table with user input
   pool.connect((error, db, done)=>{
     if(error){

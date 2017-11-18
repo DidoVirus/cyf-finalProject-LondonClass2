@@ -29,7 +29,7 @@ return (
     <div className="p-4">
         <div className="row">
             <Login  message={"LOGIN"} button={"Login With Github"}/>
-            <Login message={"NEED ANY HELP?"} button={"Contact Organisar"} href="/auth/google"/>
+            <Login message={"NEED ANY HELP?"} button={"Contact Organisar"} href="mailto:raymossekandi@gmail.com"/>
         </div>
     </div>
     <div>
