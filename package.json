@@ -9,12 +9,14 @@
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "moment": "^2.19.2",
     "passport": "^0.4.0",
     "passport-github2": "^0.1.11",
     "pg": "^7.3.0",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14"
   },
   "scripts": {
