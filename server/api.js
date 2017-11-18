@@ -12,7 +12,6 @@ var ejs = require('ejs');
 
 //using app as express
 var app = express();
-
 //setting view engine
 app.set('view engine', 'ejs');
 
