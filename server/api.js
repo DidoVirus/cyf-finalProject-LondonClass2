@@ -45,9 +45,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-headers', 'Origin, X-Requested-With, Content-Type, Accept');
 });
 //initialize the passport
-app.get('/add',(req, res, next) => {
-  res.send('hi');
-});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
