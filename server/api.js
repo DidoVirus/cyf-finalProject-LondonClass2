@@ -13,16 +13,6 @@ var ejs = require('ejs');
 //using app as express
 var app = express();
 
-<<<<<<< HEAD
-//initialize the bodyParser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-headers', 'Origin, X-Requested-With, Content-Type, Accept');
-});
-//initialize the passport
-=======
 //setting view engine
 app.set('view engine', 'ejs');
 
@@ -31,14 +21,11 @@ app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
     keys: [keys.session.cookieKey]
 }));
->>>>>>> master
 
 //intialising passport and session
 app.use(passport.initialize());
 app.use(passport.session());
 
-<<<<<<< HEAD
-=======
 //bodyParser intialising
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,4 +43,3 @@ app.use('/dashBoard', dashBoardRoutes);
 app.listen(process.env.PORT || 2500, function () {
   console.log("Server is listening on port 2500. Ready to accept requests!");
 });
->>>>>>> master
