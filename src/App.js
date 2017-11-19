@@ -8,6 +8,7 @@ import Home from './container/Home.jsx';
 import Activation from './container/Activation.jsx';
 import Dashboard from './container/Dashboard.jsx';
 import Meeting from './container/Meeting.js';
+import Organiser from './container/Organiser.jsx';
 
 
 const App = () => (
@@ -17,6 +18,7 @@ const App = () => (
       <Route path="/activation" component={Activation} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/meeting" component={Meeting} />
+      <Route path="/organiser" component={Organiser} />
 
     </div>
   </BrowserRouter>
