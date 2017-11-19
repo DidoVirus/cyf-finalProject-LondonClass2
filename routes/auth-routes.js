@@ -80,7 +80,7 @@ console.log('this the number',verifCode)
 });
 
 //handling the call back redirect from github
-router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login',successRedirect:'/auth/verif' }), (req, res) => {
+router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login',successRedirect:'http://localhost:3000/activation' }), (req, res) => {
     res.send(req.user);
 });
 
