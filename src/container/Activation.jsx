@@ -5,6 +5,9 @@ import Button from "../components/Button.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import Input from "../components/Input.js";
+import { NavLink} from 'react-router-dom';
+
+
 
 function Activation(){
 return (
@@ -22,7 +25,7 @@ return (
             <Input />
         </div>
         <div className="col-md-4 pl-4 submit pb-5">
-            <Button  button={"submit"}/>
+        <NavLink to="/Dashboard"><Button  button={"submit"}/></NavLink>
         </div>
         <div>
             <Footer />

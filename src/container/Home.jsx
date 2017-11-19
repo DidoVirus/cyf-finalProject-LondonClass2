@@ -1,23 +1,36 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import "./Home.css";
-import Button from "../components/Button.js";
 import Header from "../components/Header.js";
 import Login from "../components/Login.js";
 import Image from "../components/Image.js";
 import Footer from "../components/Footer.js";
+import axios from "axios";
 
-// const buttons =[
-//     {
-//         message:"GET YOUR ACTIVATION CODE",
-//         button:"Login with Github"
-//     },{
-//         message:"NEED ANY HELP?",
-//         button:"Contact Organiser"
-//     }
-// ]
 
-function Home(){
+
+class Home extends Component {
+    constructor(props) {
+        super(props);
+       
+    }
+
+verification = () => {
+    axios.get('../routes/auth-routes/github')
+    .then(result => {
+          this.context.router.push('/Activation')
+        })
+
+    .catch( error => {
+        console.log("error fetching", error)
+    });
+}
+
+ signup = () => {
+    this.props.alert("please email to organisar  cyf@gmail.com");
+}
+
+
+render () {
 return (
 <div className="container-fluid border border-dark rounded p-2">
     <div>
@@ -27,9 +40,9 @@ return (
         <Image />
     </div>
     <div className="p-4">
-        <div className="row"> 
-            <Login  message={"LOGIN"} button={"Login With Github"}/>
-            <Login message={"NEED ANY HELP?"} button={"Contact Organisar"}/>
+        <div className="row">
+            <Login  message={"LOGIN"} button={"Login With Github"}  onClick={this.verification()} />
+            <Login message={"NEED ANY HELP?"} button={"Contact Organisar"} onClick={this.signup} />
         </div>
     </div>
     <div>
@@ -37,5 +50,5 @@ return (
     </div>
 </div>
 )}
-
+}
 export default Home;
