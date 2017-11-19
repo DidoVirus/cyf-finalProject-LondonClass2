@@ -4,6 +4,7 @@ import "./Home.css";
 import Button from "../components/Button.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
+import { NavLink} from 'react-router-dom';
 
 function Dashboard(){
 return (
@@ -18,10 +19,10 @@ return (
             <a className="text-primary pl-4">Please Book here</a>
         </div>
         <div className="col-md-5 submit pb-5">
-            <Button button={"Book a meeting"} />
+         <NavLink to="/Meeting"><Button button={"Book a meeting"}  /></NavLink>
         </div>
         <div className="col-md-5  submit pb-5">
-            <Button  button={"Mark availability"}/>
+        <NavLink to="/Meeting"><Button  button={"Mark availability"}/></NavLink>
         </div>
         <div>
             <Footer />
