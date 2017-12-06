@@ -23,7 +23,20 @@ class Calender extends Component {
     }
 
     bookedDays = (day, time) => {
-         const pullItArray =this.state.collectData.push(`${day} ${time}`);
+        var start_timestamp;
+      if (time ==="9AM-12PM"){
+        start_timestamp = moment(day,"DD/MM/YYYY" ).add(9, 'hours').format()
+
+      } else if( time === "12PM-6PM"){
+        start_timestamp = moment(day,"DD/MM/YYYY" ).add(12, 'hours').format()
+
+      } else {
+        start_timestamp = moment(day,"DD/MM/YYYY" ).add(18, 'hours').format()
+
+      }
+
+
+         const pullItArray =this.state.collectData.push({"start_timestamp":start_timestamp});
          this.props.getData(this.state.collectData);
     }
 
@@ -42,7 +55,7 @@ class Calender extends Component {
         const timeInDay=["9AM-12PM","12PM-6PM","6PM-8PM"];
         // this.props.getData(this.state.collectData)
         // console.log(this.state.collectData);
-            
+
     return(
         <table className="table table-responsive">
         <thead>
@@ -60,7 +73,7 @@ class Calender extends Component {
                     {dayInTheWeek.map((day)=>{
                     return   <td><CalenderButton bookedDays={this.bookedDays} day={day} value={time} booked={false}/></td>;
                 })}
-                   </tr> 
+                   </tr>
 
             })}
     </tbody>

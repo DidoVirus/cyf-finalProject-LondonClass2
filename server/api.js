@@ -9,6 +9,8 @@ var authRoutes = require('../routes/auth-routes');
 var dashBoardRoutes = require('../routes/dashBoard-routes');
 var keys = require('../config/keys');
 var ejs = require('ejs');
+var cors = require('cors')
+
 
 //using app as express
 var app = express();
@@ -21,6 +23,8 @@ app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
     keys: [keys.session.cookieKey]
 }));
+
+app.use(cors());
 
 //intialising passport and session
 app.use(passport.initialize());
