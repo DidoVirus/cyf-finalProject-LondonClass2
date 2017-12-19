@@ -20,10 +20,7 @@ pool.connect((error, db, done)=>{
     db.query('SELECT * from slots',(error, table)=>{
       done();
       if(error){
-        return console.log(error);
-      }
-      else {
-        //console.log(table);
+        return console.log(error)
       }
     })
   }

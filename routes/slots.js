@@ -1,140 +1,116 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
-//var bodyParser = require('body-parser');
-//require('dotenv').config()
 var dbs = require('./db.js');
 var pool = dbs.getPool();
 var moment = require('moment');
 moment.locale('en-GB')
-//app.use(bodyParser.json({ type: 'application/json'}));
 
 
+// calculate the beginning and ending of the week  
+const weekStart = moment().add(1,'w').startOf('week')  
+const weekEnd = moment().add(1,'w').endOf('week')   
 
-// define the home page route
-router.get('/', function(req, res) {
- res.send('Homepage')
-})
-
-// define the slots page route
-router.get('/slots', function(req, res) {
-})
-
-// define the userslots page route
+// get the slots to userslots page form slots table
 router.get('/slots/:id', async function(req, res) {
-
-  // calculate the beginning of the week
-  const startDate = moment().startOf('week')  //moment().startOf('week')
-  const endDate = moment().endOf('week')     //moment().add(startDate.day(),'day')
 
   const params = [
     req.params.id,
-    startDate.format(),
-    endDate.format()
-  ];
+    weekStart.format(),
+    weekEnd.format()
+  ]
   const sql = `SELECT *
                FROM slots
                WHERE user_id = $1
                AND start_timestamp BETWEEN $2 AND $3`
-  const selectSlotsTimeNote = (row)=> ({start_timestamp: row.start_timestamp,
-                            note:row.note})
-  const getSlotsOfAvailability = (data)=> {
-  const resutDataObject = {
-        id:req.params.id,
-        status:true,
-        user_availability:data.rows.map(selectSlotsTimeNote)
+  const selectSlotsTimeNote = row => ({
+    start_timestamp: row.start_timestamp,
+    note:row.note
+    })
+  const getSlotsOfAvailability = data=> {
+    const resutDataObject = {
+      id:req.params.id,
+      status:true,
+      user_availability:data.rows.map(selectSlotsTimeNote)
       }
-      return resutDataObject
-  }
+    return resutDataObject
+    }
 
   table = await pool.query(sql, params)
-          .then((data) => res.status(200).send(getSlotsOfAvailability(data)))
-          .catch((err) => {
-            console.log(err);
-            res.status(500).send({status:false})
-          })
-})
+  .then(data => res.status(200).send(getSlotsOfAvailability(data)))
+  .catch(err => {
+    res.status(500).send({status:false})
+    })
+  })
 
-
+// delet userslots from userslots page 
 router.delete('/slots/:id', async function (req, res) {
   const sql = `DELETE FROM slots
                 WHERE user_id = $1;`
-  const data = [
-        req.params.id
-                ]
+  const data = [req.params.id]
+
   table = await pool.query(sql,data)
-            .then((data) => res.status(200).send({status: true}))
-            .catch((err) => {
-              console.log(err);
-              res.status(500).send({status:false})
-            })
-})
+  .then(data => res.status(200).send({status: true}))
+  .catch(err => {
+    res.status(500).send({status:false})
+    })
 
+  })
 
+// post the userslots to the slots table  
 router.post('/slots/:id', async function(req, res) {
-  const sql = `INSERT INTO slots (user_id, start_timestamp, note)
-            VALUES ($1,$2,$3),
-                   ($1,$4,$5),
-                   ($1,$6,$7);`
-  const data = [
-    req.params.id,
-    req.body.user_availability[0].start_timestamp,
-    req.body.user_availability[0].note,
-    req.body.user_availability[1].start_timestamp,
-    req.body.user_availability[1].note,
-    req.body.user_availability[2].start_timestamp,
-    req.body.user_availability[2].note
-  ]
 
-  table = await pool.query(sql, data)
-            .then((data) => res.status(200).send({status: true}))
-            .catch((err) => {
-              console.log(err);
-              res.status(500).send({status:false})
-            })
- })
+  req.body.user_availability.forEach(user_availability => {  
+    let data = [
+      req.params.id,
+      user_availability.start_timestamp,
+      user_availability.note
+      ]
 
- // define the organiser page route
- router.get('/organiser', function(req, res) {
-   res.send('Admin Homepage');
+    let sql = `INSERT INTO slots (user_id, start_timestamp, note)
+              VALUES ($1,$2,$3);`
+    pool.query(sql, data)
+    .then(data => res.status(200))
+    .catch(err => {
+      res.status(500).send({status:false})
+      })
+    })
+    res.send({status:true})    
+  }) 
 
- })
-
- // define the organiser user_availability page route
+ // define the route organiser user_availability page route
  router.get('/organiser/:id/:user_id', async function(req, res) {
-
-   // calculate the beginning of the week
-   const startDate = moment().startOf('week')  //moment().startOf('week')
-   const endDate = moment().endOf('week')     //moment().add(startDate.day(),'day')
-
    const params = [
-     req.params.user_id,
-     startDate.format(),
-     endDate.format()
-   ];
+      req.params.user_id,
+      weekStart.format(),
+      weekEnd.format()
+    ]
+
    const sql = `SELECT *
                 FROM slots
                 WHERE user_id = $1
                 AND start_timestamp BETWEEN $2 AND $3`
-   const selectSlotsTimeNote = (row)=> ({
-                              start_timestamp: row.start_timestamp,
-                              note:row.note,
-                              slot_id:row.slot_id})
-   const getSlotsOfAvailability = (data)=> {
+                
+   const selectSlotsTimeNote = row => ({
+     start_timestamp: row.start_timestamp,
+     note:row.note,
+     slot_id:row.slot_id
+    })
+   const getSlotsOfAvailability = data => {
    const resutDataObject = {
-         id:req.params.user_id,
-         status:true,
-         user_availability:data.rows.map(selectSlotsTimeNote)
-       }
-       return resutDataObject
+     id:req.params.user_id,
+     status:true,
+     user_availability:data.rows.map(selectSlotsTimeNote)
+    }
+     return resutDataObject
    }
-
+   
    table = await pool.query(sql, params)
-           .then((data) => res.status(200).send(getSlotsOfAvailability(data)))
-           .catch((err) => {
-             console.log(err);
-             res.status(500).send({status:false})
-           })
+    .then((data) => res.status(200).send(getSlotsOfAvailability(data)))
+    .catch((err) => {
+
+      res.status(500).send({status:false})
+    })
  })
 
 
