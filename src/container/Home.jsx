@@ -11,23 +11,23 @@ import axios from "axios";
 class Home extends Component {
     constructor(props) {
         super(props);
-       
+
     }
 
-verification = () => {
-    axios.get('../routes/auth-routes/github')
-    .then(result => {
-          this.context.router.push('/Activation')
-        })
-
-    .catch( error => {
-        console.log("error fetching", error)
-    });
-}
-
- signup = () => {
-    this.props.alert("please email to organisar  cyf@gmail.com");
-}
+// verification = () => {
+//     axios.get('http://localhost:2500/auth/github')
+//     .then(result => {
+//           this.context.router.push('/Activation')
+//         })
+//
+//     .catch( error => {
+//         console.log("error fetching", error)
+//     });
+// }
+//
+//  signup = () => {
+//     this.props.alert("please email to organisar  cyf@gmail.com");
+// }
 
 
 render () {
@@ -41,8 +41,8 @@ return (
     </div>
     <div className="p-4">
         <div className="row">
-            <Login  message={"LOGIN"} button={"Login With Github"}  onClick={this.verification()} />
-            <Login message={"NEED ANY HELP?"} button={"Contact Organisar"} onClick={this.signup} />
+            <Login  message={"LOGIN"} button={"Login with github"}  />
+            <Login message={"NEED ANY HELP?"} button={"Contact Organiser"} onClick={this.signup} />
         </div>
     </div>
     <div>

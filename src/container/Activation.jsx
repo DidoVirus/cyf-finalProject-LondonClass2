@@ -25,7 +25,7 @@ return (
             <Input />
         </div>
         <div className="col-md-4 pl-4 submit pb-5">
-        <NavLink to="/Dashboard"><Button  button={"submit"}/></NavLink>
+        <NavLink to="/Dashboard"></NavLink>
         </div>
         <div>
             <Footer />

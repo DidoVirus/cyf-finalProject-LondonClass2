@@ -7,7 +7,8 @@ function Login(props){
         <div className="col col-md-6 text-center">
             <h3 className="text-center">{props.message}</h3>
             <hr />
-            <NavLink to="/organiser"><Button  button={props.button}/></NavLink>
+            <a className="btn btn-primary btn-lg mx-auto" href="http://localhost:2500/auth/github">{props.button}</a>
+
         </div>
     )}
     export default Login;

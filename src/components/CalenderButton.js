@@ -10,12 +10,11 @@ class CalenderButton extends Component {
         }
     }
     changeButtonColor = ()=> {
-        return this.state.booked ? "btn-outline-success" : "btn-primary" 
+        return this.state.booked ? "btn-outline-success" : "btn-primary"
     }
 
 
     returnValue = () => {
-        
         this.props.bookedDays(this.props.day,this.props.value);
         console.log(this.props.day,this.props.value);
         //this.props.getValue(this.props.value);
@@ -25,9 +24,9 @@ class CalenderButton extends Component {
     }
     render(){
         const value = this.props;
-        
+
         return(
-            
+
             <button className={"btn " +this.changeButtonColor()} onClick={this.returnValue}>{this.props.value} {this.props.booked}</button>
         )
 

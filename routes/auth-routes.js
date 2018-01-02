@@ -6,6 +6,7 @@ var pool = dbs.getPool();
 
 // auth login to return the logining page
 router.get('/login', (req, res) => {
+  req.session.user = req.user;
     res.render('login', { user: req.user });
 });
 
@@ -13,6 +14,10 @@ router.get('/login', (req, res) => {
 router.get('/logout', (req, res) => {
   req.logout();
 res.redirect('/');
+});
+
+router.get('/meeting', (req, res) => {
+res.redirect('http://localhost:3000/meeting');
 });
 
 // auth github to call github to authoticate
@@ -28,16 +33,40 @@ router.get('/verif', function(req, res, next) {
 router.get('/verifAgain', function(req, res, next) {
   res.render('verifAgain',{ user: req.user })
 });
+//get slots data
+router.post('/sloted', function(req, res, next) {
+  console.log('am user',req.body.start_timestamp[0].start_timestamp);
+  console.log('hey buddie',req.session);
+  console.log('hey user',req.user);
+  pool.connect((error, db, done2)=>{
+  if(error){
+    return console.log(error);
+  }
+  // db.query('INSERT INTO slots (start_timestamp,note) VALUES ($1, $2) RETURNING *',
+  // [req.body.start_timestamp,req.body.note]
 
-// //rendering the dashboard
-// router.get('/dashBoard', function(req, res, next) {
-//   res.render('dashBoard')
-// });
+    else{
+      console.info('doing stuff')
+      db.query(`UPDATE slots
+        SET start_timestamp=$1, note=$2
+        WHERE user_id=71;`,
+        [req.body.start_timestamp[0].start_timestamp,req.body.note],(error, insertProfile)=>{
+            if(error){
+              return console.log(error);
+            } else {
+              console.log("am the")
+            }
+            //done(null,insertProfile.rows[0]);
+          })
+        }
+    })
+  res.redirect('http://localhost:3000/');
+});
 
 //auth verif to capture what the user verification code
 router.post('/verif', function(req, res) {
   var verifCode =req.body.id;// storing the user verification code in variable
-
+console.log('this the number',verifCode)
   //connecting to database to check verification_codes table with user input
   pool.connect((error, db, done)=>{
     if(error){
@@ -56,6 +85,8 @@ router.post('/verif', function(req, res) {
           }
           else{
               console.log(user.rows[0])
+              console.log('yesyes',req.user.user_id);
+                var user_id = req.user.user_id;
                 var studentValue = user.rows[0].role_student;
                 var mentorValue = user.rows[0].role_mentor;
                 var organiserValue = user.rows[0].role_organiser;
@@ -68,19 +99,27 @@ router.post('/verif', function(req, res) {
             if(error){
               return console.log('am the ',error);
             }
-            else{
-              res.redirect('/dashBoard/');
+            else {
+              db.query('INSERT INTO slots (user_id) VALUES ($1) RETURNING *',
+              [user_id] ,(error, insertProfile)=>{
+                if(error){
+                  return console.log(error);
+                }
+                else{
+                      res.redirect('http://localhost:3000/dashboard');
             }
+          })
         };
-    };
 
+};
+};
 });
 };
 });
 });
 
 //handling the call back redirect from github
-router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login',successRedirect:'/auth/verif' }), (req, res) => {
+router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login',successRedirect:'http://localhost:3000/activation' }), (req, res) => {
     res.send(req.user);
 });
 

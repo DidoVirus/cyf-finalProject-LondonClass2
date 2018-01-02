@@ -7,5 +7,5 @@ function Image(props){
         </div>
     )}
 
-   
+
 export default Image;
