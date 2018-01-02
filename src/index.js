@@ -7,10 +7,10 @@ import Header from './components/Header';
 import Home from './container/Home.jsx';
 import Activation from './container/Activation.jsx';
 import Dashboard from './container/Dashboard.jsx';
-import Meeting from './container/Meeting.jsx';
+import Meeting from './container/Meeting.js';
 
 
 
-ReactDOM.render(<Meeting />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 registerServiceWorker();

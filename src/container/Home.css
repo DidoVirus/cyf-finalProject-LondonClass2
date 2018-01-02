@@ -19,3 +19,10 @@ border {
 .submit{
     margin-left: 550px
 }
+.github-btn{
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+    background: #ff5353;
+}
