@@ -10,7 +10,8 @@ var dashBoardRoutes = require('../routes/dashBoard-routes');
 var keys = require('../config/keys');
 var ejs = require('ejs');
 var cors = require('cors')
-
+var slots = require('../routes/slots');
+var match_making = require('../routes/match_making');
 
 //using app as express
 var app = express();
@@ -48,7 +49,8 @@ app.get('/', (req, res) => {
 app.post('/', function(req, res, next) {
  // Handle the post for this route
 });
-
+app.use('/api', slots);
+app.use('/api', match_making);
 
 //using the auth for routes
 app.use('/auth', authRoutes);

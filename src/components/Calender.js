@@ -12,6 +12,22 @@ class Calender extends Component {
 
     }
 
+<<<<<<< HEAD
+    setDate = (dateTime) => this.setState({ dateTime })
+
+    render() {
+        return (
+        <DateTimePicker
+            onChange={this.setDate}
+            DatePicker={DatePickerDialog}
+            TimePicker={TimePickerDialog}
+        />
+        );
+    }
+}
+
+);
+=======
     period = (time) => {
         if (time ==="9AM-12PM"){
             return "MORNING";
@@ -81,5 +97,6 @@ class Calender extends Component {
       );
     }
 }
+>>>>>>> master
 
 export default Calender;

@@ -11,6 +11,7 @@ moment.locale('en-GB')
 const weekStart = moment().add(1,'w').startOf('week')
 const weekEnd = moment().add(1,'w').endOf('week')
 
+
 // get the slots to userslots page form slots table
 router.get('/slots/:id', async function(req, res) {
 
@@ -43,7 +44,8 @@ router.get('/slots/:id', async function(req, res) {
     })
   })
 
-// delet userslots from userslots page
+
+// delete userslots from userslots page 
 router.delete('/slots/:id', async function (req, res) {
   const sql = `DELETE FROM slots
                 WHERE user_id = $1;`
@@ -57,10 +59,12 @@ router.delete('/slots/:id', async function (req, res) {
 
   })
 
-// post the userslots to the slots table
+
+// post the userslots to the slots table  
 router.post('/slots/:id', async function(req, res) {
 
-  req.body.user_availability.forEach(user_availability => {
+  req.body.user_availability.forEach(user_availability => {  
+
     let data = [
       req.params.id,
       user_availability.start_timestamp,
@@ -75,6 +79,7 @@ router.post('/slots/:id', async function(req, res) {
       res.status(500).send({status:false})
       })
     })
+s
     res.send({status:true})
   })
 
