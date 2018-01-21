@@ -4,6 +4,9 @@ var keys = require('./keys');
 var dbs = require('./db.js');
 var pool = dbs.getPool();
 
+
+
+
 //serialising user after done method to create a cookie
 passport.serializeUser((currentUser, done) => {
   console.log("attempting serialisation");
