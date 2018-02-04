@@ -3,3 +3,4 @@ node_modules/
 config/keys.js
 server/views
 src/components/verif.ejs
+package-lock.json
