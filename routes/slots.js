@@ -11,6 +11,7 @@ moment.locale('en-GB')
 const weekStart = moment().add(1,'w').startOf('week')
 const weekEnd = moment().add(1,'w').endOf('week')
 
+
 // get the slots to userslots page form slots table
 router.get('/slots/:id', async function(req, res) {
 
@@ -45,6 +46,7 @@ router.get('/slots/:id', async function(req, res) {
 
 // delet userslots from userslots page
 router.delete('/slots', async function (req, res) {
+
   const sql = `DELETE FROM slots
                 WHERE user_id = $1;`
   const data = [req.params.id]
@@ -83,6 +85,7 @@ console.log(newData);
       res.status(500).send({status:false})
       })
     })
+s
     res.send({status:true})
   })
 

@@ -2,6 +2,9 @@
 /* this is other style button it might use for future
 
 
+<<<<<<< HEAD
+export default TimeForm;
+=======
 // import React from "react";
 // import TimePicker from 'react-bootstrap-time-picker';
 
@@ -26,3 +29,4 @@
 // )}
 
 // export default TimeForm;
+>>>>>>> master
