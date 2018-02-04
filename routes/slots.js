@@ -44,7 +44,7 @@ router.get('/slots/:id', async function(req, res) {
   })
 
 // delet userslots from userslots page
-router.delete('/slots/:id', async function (req, res) {
+router.delete('/slots', async function (req, res) {
   const sql = `DELETE FROM slots
                 WHERE user_id = $1;`
   const data = [req.params.id]
@@ -58,11 +58,12 @@ router.delete('/slots/:id', async function (req, res) {
   })
 
 // post the userslots to the slots table
-router.post('/slots/:id', async function(req, res) {
-
+router.post('/slots', async function(req, res) {
+  console.log('############################################# >>>>>' + req.body)
+// console.log('this the id',req.body.id)
   req.body.user_availability.forEach(user_availability => {
     let data = [
-      req.params.id,
+      req.body.id,
       user_availability.start_timestamp,
       user_availability.note
       ]
