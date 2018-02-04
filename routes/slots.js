@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var app = express();
-var dbs = require('./db.js');
+var bodyParser = require('body-parser');
+var dbs = require('../config/db.js');
 var pool = dbs.getPool();
 var moment = require('moment');
 moment.locale('en-GB')
@@ -44,9 +44,9 @@ router.get('/slots/:id', async function(req, res) {
     })
   })
 
+// delet userslots from userslots page
+router.delete('/slots', async function (req, res) {
 
-// delete userslots from userslots page 
-router.delete('/slots/:id', async function (req, res) {
   const sql = `DELETE FROM slots
                 WHERE user_id = $1;`
   const data = [req.params.id]
@@ -59,16 +59,22 @@ router.delete('/slots/:id', async function (req, res) {
 
   })
 
-
-// post the userslots to the slots table  
-router.post('/slots/:id', async function(req, res) {
-
-  req.body.user_availability.forEach(user_availability => {  
-
+// post the userslots to the slots table
+router.post('/slots', async function(req, res) {
+let newData = []
+req.body.user_availability.forEach((start_timestamp) => {
+  newData.push({
+    start_timestamp: start_timestamp,
+    note: req.body.note
+  });
+});
+console.log(newData);
+// console.log('this the id',req.body.id)
+  req.body.user_availability.forEach(user_availability => {
     let data = [
-      req.params.id,
+      req.body.id,
       user_availability.start_timestamp,
-      user_availability.note
+      req.body.note
       ]
 
     let sql = `INSERT INTO slots (user_id, start_timestamp, note)

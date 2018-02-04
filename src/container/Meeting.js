@@ -13,10 +13,12 @@ import { Form, FormControl } from 'react-bootstrap';
 class Meeting extends Component {
     constructor(props) {
         super(props);
-        this.state = { collectedData: null,value:""};
+        // This is not anybody's change (ghosts did it I think <Ahmed>)
+        // it was like that before "start_timestamp":this.state.collectedData
+        this.state = {collectedData: null,value:""};
         this.getData = this.getData.bind(this);
-
-    this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        console.log(this.state);
     }
 
     handleChange(event) {
@@ -25,12 +27,11 @@ class Meeting extends Component {
     getData(data) {
         this.setState({
           collectedData: Object.assign([],data),
-          // console.log('this me data',data)
 
     })
     }
     getSlots = () => {
-      fetch('http://localhost:2500/auth/sloted', {
+      fetch('http://localhost:2500/slots/slots', {
       method: 'POST',
       //credentials: 'include',
       mode:'cors',
@@ -39,7 +40,7 @@ class Meeting extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        "start_timestamp":this.state.collectedData,
+        "user_availability":this.state.collectedData,
         "note":this.state.value
       })
     })
