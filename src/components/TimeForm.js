@@ -4,7 +4,6 @@
 
 <<<<<<< HEAD
 export default TimeForm;
-=======
 // import React from "react";
 // import TimePicker from 'react-bootstrap-time-picker';
 
@@ -29,4 +28,3 @@ export default TimeForm;
 // )}
 
 // export default TimeForm;
->>>>>>> master
