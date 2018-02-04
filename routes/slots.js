@@ -59,14 +59,14 @@ router.delete('/slots', async function (req, res) {
 
 // post the userslots to the slots table
 router.post('/slots', async function(req, res) {
-// let newData = []
-// req.body.user_availability.forEach((start_timestamp) => {
-//   newData.push({
-//     start_timestamp: start_timestamp,
-//     note: req.body.note
-//   });
-// });
-// console.log(newData);
+let newData = []
+req.body.user_availability.forEach((start_timestamp) => {
+  newData.push({
+    start_timestamp: start_timestamp,
+    note: req.body.note
+  });
+});
+console.log(newData);
 // console.log('this the id',req.body.id)
   req.body.user_availability.forEach(user_availability => {
     let data = [
