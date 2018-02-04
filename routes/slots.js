@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var app = express();
-var dbs = require('./db.js');
+var bodyParser = require('body-parser');
+var dbs = require('../config/db.js');
 var pool = dbs.getPool();
 var moment = require('moment');
 moment.locale('en-GB')
@@ -59,13 +59,20 @@ router.delete('/slots', async function (req, res) {
 
 // post the userslots to the slots table
 router.post('/slots', async function(req, res) {
-  console.log('############################################# >>>>>' + req.body)
+// let newData = []
+// req.body.user_availability.forEach((start_timestamp) => {
+//   newData.push({
+//     start_timestamp: start_timestamp,
+//     note: req.body.note
+//   });
+// });
+// console.log(newData);
 // console.log('this the id',req.body.id)
   req.body.user_availability.forEach(user_availability => {
     let data = [
       req.body.id,
       user_availability.start_timestamp,
-      user_availability.note
+      req.body.note
       ]
 
     let sql = `INSERT INTO slots (user_id, start_timestamp, note)

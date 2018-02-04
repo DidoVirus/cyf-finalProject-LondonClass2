@@ -6,6 +6,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const passportSetup = require('../config/passport-setup');
 var authRoutes = require('../routes/auth-routes');
+var slots = require('../routes/slots');
 var dashBoardRoutes = require('../routes/dashBoard-routes');
 var keys = require('../config/keys');
 var ejs = require('ejs');
@@ -53,6 +54,7 @@ app.post('/', function(req, res, next) {
 //using the auth for routes
 app.use('/auth', authRoutes);
 app.use('/dashBoard', dashBoardRoutes);
+app.use('/slots', slots);
 
 
 

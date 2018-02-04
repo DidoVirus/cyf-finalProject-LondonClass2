@@ -14,7 +14,7 @@ class Meeting extends Component {
     constructor(props) {
         super(props);
         // This is not anybody's change (ghosts did it I think <Ahmed>)
-        // it was like that before "start_timestamp":this.state.collectedData,
+        // it was like that before "start_timestamp":this.state.collectedData
         this.state = {collectedData: null,value:""};
         this.getData = this.getData.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -31,7 +31,7 @@ class Meeting extends Component {
     })
     }
     getSlots = () => {
-      fetch('http://localhost:2500/auth/sloted', {
+      fetch('http://localhost:2500/slots/slots', {
       method: 'POST',
       //credentials: 'include',
       mode:'cors',

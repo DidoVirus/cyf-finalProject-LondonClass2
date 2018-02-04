@@ -35,9 +35,6 @@ router.get('/verifAgain', function(req, res, next) {
 });
 //get slots data
 router.post('/sloted', function(req, res, next) {
-  console.log('am user',req.body.start_timestamp[0].start_timestamp);
-  console.log('hey buddie',req.session);
-  console.log('hey user',req.user);
   pool.connect((error, db, done2)=>{
   if(error){
     return console.log(error);
@@ -50,7 +47,7 @@ router.post('/sloted', function(req, res, next) {
       db.query(`UPDATE slots
         SET start_timestamp=$1, note=$2
         WHERE user_id=71;`,
-        [req.body.start_timestamp[0].start_timestamp,req.body.note],(error, insertProfile)=>{
+        [req.body.user_availability[0].start_timestamp,req.body.note],(error, insertProfile)=>{
             if(error){
               return console.log(error);
             } else {
