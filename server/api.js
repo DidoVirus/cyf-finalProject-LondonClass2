@@ -56,7 +56,7 @@ app.use('/api', match_making);
 //using the auth for routes
 app.use('/auth', authRoutes);
 app.use('/dashBoard', dashBoardRoutes);
-app.use('/slots', slots);
+//app.use('/slots', slots);
 
 
 

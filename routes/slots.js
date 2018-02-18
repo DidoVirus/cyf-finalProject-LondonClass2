@@ -59,24 +59,45 @@ router.delete('/slots', async function (req, res) {
 
   })
 
+// // post the userslots to the slots table
+// router.post('/slots', async function(req, res) {
+// let newData = []
+// req.body.user_availability.forEach((start_timestamp) => {
+//   newData.push({
+//     start_timestamp: start_timestamp,
+//     note: req.body.note
+//   });
+// });
+// console.log(newData);
+// // console.log('this the id',req.body.id)
+//   req.body.user_availability.forEach(user_availability => {
+//     let data = [
+//       req.body.id,
+//       user_availability.start_timestamp,
+//       req.body.note
+//       ]
+//
+//     let sql = `INSERT INTO slots (user_id, start_timestamp, note)
+//               VALUES ($1,$2,$3);`
+//     pool.query(sql, data)
+//     .then(data => res.status(200))
+//     .catch(err => {
+//       res.status(500).send({status:false})
+//       })
+//     })
+// s
+//     res.send({status:true})
+//   })
 // post the userslots to the slots table
 router.post('/slots', async function(req, res) {
-let newData = []
-req.body.user_availability.forEach((start_timestamp) => {
-  newData.push({
-    start_timestamp: start_timestamp,
-    note: req.body.note
-  });
-});
-console.log(newData);
-// console.log('this the id',req.body.id)
+
   req.body.user_availability.forEach(user_availability => {
     let data = [
-      req.body.id,
+      req.params.id,
       user_availability.start_timestamp,
       req.body.note
       ]
-
+      console.log(data);
     let sql = `INSERT INTO slots (user_id, start_timestamp, note)
               VALUES ($1,$2,$3);`
     pool.query(sql, data)
@@ -85,7 +106,6 @@ console.log(newData);
       res.status(500).send({status:false})
       })
     })
-s
     res.send({status:true})
   })
 
