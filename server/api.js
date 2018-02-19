@@ -13,6 +13,7 @@ var ejs = require('ejs');
 var cors = require('cors')
 var slots = require('../routes/slots');
 var match_making = require('../routes/match_making');
+var session = require('express-session');
 
 //using app as express
 var app = express();
@@ -26,7 +27,14 @@ app.use(cookieSession({
     keys: [keys.session.cookieKey]
 }));
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+
+app.use(session({
+  secret: 'convenientapp',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
 
 //intialising passport and session
 app.use(passport.initialize());
@@ -37,8 +45,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  //res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
@@ -55,7 +63,7 @@ app.use('/api', match_making);
 
 //using the auth for routes
 app.use('/auth', authRoutes);
-app.use('/dashBoard', dashBoardRoutes);
+//app.use('/dashBoard', dashBoardRoutes);
 //app.use('/slots', slots);
 
 

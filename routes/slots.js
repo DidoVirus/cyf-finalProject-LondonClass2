@@ -88,12 +88,28 @@ router.delete('/slots', async function (req, res) {
 // s
 //     res.send({status:true})
 //   })
+
+router.get('/user', function getUser(req, res, next) {
+  console.log(req.session, req.session.user);
+
+  if(!req.session.user) {
+    req.session.user = { test: 'test' };
+    res.status(403);
+    return res.send('Not logged in');
+  }
+
+  res.send(req.session.user);
+});
+
 // post the userslots to the slots table
 router.post('/slots', async function(req, res) {
 
+  console.log("req.session");
+  console.log(req.session);
+
   req.body.user_availability.forEach(user_availability => {
     let data = [
-      req.params.id,
+      req.session.passport.user,
       user_availability.start_timestamp,
       req.body.note
       ]
