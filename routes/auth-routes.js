@@ -3,6 +3,7 @@ const passport = require('passport');
 var bodyParser = require('body-parser');
 var dbs = require('../config/db.js');
 var pool = dbs.getPool();
+const url = require('url');
 
 // auth login to return the logining page
 router.get('/login', (req, res) => {
@@ -18,6 +19,12 @@ res.redirect('/');
 
 router.get('/meeting', (req, res) => {
 res.redirect('http://localhost:3000/meeting');
+});
+
+router.get('/user-details', (req, res) => {
+  console.log("USER DETAILS");
+  console.log(req.user);
+  res.status(200).send({ user: req.user });
 });
 
 // auth github to call github to authoticate
@@ -57,7 +64,7 @@ router.post('/sloted', function(req, res, next) {
           })
         }
     })
-  res.redirect('http://localhost:3000/');
+  res.redirect('http://localhost:3000/dashboard');
 });
 
 //auth verif to capture what the user verification code
@@ -103,9 +110,14 @@ console.log('this the number',verifCode)
                   return console.log(error);
                 }
                 else{
-                      res.redirect('http://localhost:3000/dashboard');
-            }
-          })
+                  // res.redirect('/');
+                      // res.redirect('http://localhost:3000/dashboard');
+                      res.redirect(url.format({
+                        pathname:"http://localhost:3000/dashboard",
+                        // pathname:"/",
+                        query:{user: req.user} ,
+                      }));
+          }})
         };
 
 };
@@ -116,8 +128,12 @@ console.log('this the number',verifCode)
 });
 
 //handling the call back redirect from github
-router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login',successRedirect:'http://localhost:3000/activation' }), (req, res) => {
-    res.send(req.user);
+router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login' }), (req, res) => {
+    console.log("me t",req.user.github_id);
+    // const user = 'Basic ' + req.user.github_id +':'+ req.user.github_username
+    // const userencrypted = btao('Bearer ' + user)
+    res.redirect('http://localhost:3000/activation');
+
 });
 
 module.exports = router;
