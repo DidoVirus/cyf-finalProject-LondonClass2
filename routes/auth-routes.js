@@ -40,6 +40,7 @@ router.get('/verif', function(req, res, next) {
 router.get('/verifAgain', function(req, res, next) {
   res.render('verifAgain',{ user: req.user })
 });
+<<<<<<< HEAD
 //get slots data
 router.post('/sloted', function(req, res, next) {
   pool.connect((error, db, done2)=>{
@@ -66,11 +67,42 @@ router.post('/sloted', function(req, res, next) {
     })
   res.redirect('http://localhost:3000/dashboard');
 });
+=======
+// //get slots data
+// router.post('/slots', function(req, res, next) {
+//   console.log('am user',req.body.start_timestamp[0].start_timestamp);
+//   console.log('hey buddie',req.session);
+//   console.log('hey user',req.user);
+//   pool.connect((error, db, done2)=>{
+//   if(error){
+//     return console.log(error);
+//   }
+//   // db.query('INSERT INTO slots (start_timestamp,note) VALUES ($1, $2) RETURNING *',
+//   // [req.body.start_timestamp,req.body.note]
+//
+//     else{
+//       console.info('doing stuff')
+//       db.query(`UPDATE slots
+//         SET start_timestamp=$1, note=$2
+//         WHERE user_id=71;`,
+//         [req.body.start_timestamp[0].start_timestamp,req.body.note],(error, insertProfile)=>{
+//             if(error){
+//               return console.log(error);
+//             } else {
+//               console.log("am the")
+//             }
+//             //done(null,insertProfile.rows[0]);
+//           })
+//         }
+//     })
+//   res.redirect('http://localhost:3000/');
+// });
+>>>>>>> 0f828e802d59940827b0e14ef9b6bc0007abe197
 
 //auth verif to capture what the user verification code
 router.post('/verif', function(req, res) {
   var verifCode =req.body.id;// storing the user verification code in variable
-console.log('this the number',verifCode)
+//console.log('this the number',verifCode)
   //connecting to database to check verification_codes table with user input
   pool.connect((error, db, done)=>{
     if(error){
@@ -88,8 +120,8 @@ console.log('this the number',verifCode)
             res.redirect('/auth/verifAgain');
           }
           else{
-              console.log(user.rows[0])
-              console.log('yesyes',req.user.user_id);
+              //console.log(user.rows[0])
+              //console.log('yesyes',req.user.user_id);
                 var user_id = req.user.user_id;
                 var studentValue = user.rows[0].role_student;
                 var mentorValue = user.rows[0].role_mentor;
@@ -103,6 +135,7 @@ console.log('this the number',verifCode)
             if(error){
               return console.log('am the ',error);
             }
+<<<<<<< HEAD
             else {
               db.query('INSERT INTO slots (user_id) VALUES ($1) RETURNING *',
               [user_id] ,(error, insertProfile)=>{
@@ -119,6 +152,22 @@ console.log('this the number',verifCode)
                       }));
           }})
         };
+=======
+            else{
+                  res.redirect('http://localhost:3000/dashboard');
+        }
+        //     else {
+        //       db.query('INSERT INTO slots (user_id) VALUES ($1) RETURNING *',
+        //       [user_id] ,(error, insertProfile)=>{
+        //         if(error){
+        //           return console.log(error);
+        //         }
+        //         else{
+        //               res.redirect('http://localhost:3000/dashboard');
+        //     }
+        //   })
+        // };
+>>>>>>> 0f828e802d59940827b0e14ef9b6bc0007abe197
 
 };
 };
@@ -126,14 +175,68 @@ console.log('this the number',verifCode)
 };
 });
 });
+//     else {
+//       db.query('INSERT INTO slots (user_id) VALUES ($1) RETURNING *',
+//       [user_id] ,(error, insertProfile)=>{
+//         if(error){
+//           return console.log(error);
+//         }
+//         else{
+//               res.redirect('http://localhost:3000/dashboard');
+//     }
+//   })
+// };
+
+// };
+// };
+// });
+// };
+// });
+// });
 
 //handling the call back redirect from github
+<<<<<<< HEAD
 router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login' }), (req, res) => {
     console.log("me t",req.user.github_id);
     // const user = 'Basic ' + req.user.github_id +':'+ req.user.github_username
     // const userencrypted = btao('Bearer ' + user)
     res.redirect('http://localhost:3000/activation');
 
+=======
+router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login'}),
+function(req, res) {
+var user_id1 = req.user.github_id;
+
+  // console.log("am userrrrr",req.user.user_id;)
+  pool.connect((error, db, done)=>{
+    if(error){
+      return console.log(error);
+    }
+     else {
+      db.query('SELECT * FROM users WHERE github_id= $1',[user_id1],(error, user)=>{
+        console.log('user.rowCount info ',user)
+        done();
+        if(error){
+          return console.log(error);
+        }
+    //updating the user table with user verification cod
+        else if (!user.rowCount){
+            res.redirect('http://localhost:3000/Dashboard');
+          }
+           else{
+    res.redirect('http://localhost:3000/Activation');
+  }
+  // Successful authentication, redirect home.
+
+  });
+}
+})
+>>>>>>> 0f828e802d59940827b0e14ef9b6bc0007abe197
 });
+
+//handling the call back redirect from github
+// router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login',successRedirect:'http://localhost:3000/Activation' }), (req, res) => {
+//     res.send(req.user);
+// });
 
 module.exports = router;
