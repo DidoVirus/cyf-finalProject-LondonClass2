@@ -31,9 +31,9 @@ class Meeting extends Component {
     })
     }
     getSlots = () => {
-      fetch('http://localhost:2500/slots/slots', {
+      fetch('http://localhost:2500/api/slots', {
       method: 'POST',
-      //credentials: 'include',
+      credentials: 'include',
       mode:'cors',
       headers: {
         'Accept': 'application/json',

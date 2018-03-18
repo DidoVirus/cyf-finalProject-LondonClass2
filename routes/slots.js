@@ -59,24 +59,61 @@ router.delete('/slots', async function (req, res) {
 
   })
 
+// // post the userslots to the slots table
+// router.post('/slots', async function(req, res) {
+// let newData = []
+// req.body.user_availability.forEach((start_timestamp) => {
+//   newData.push({
+//     start_timestamp: start_timestamp,
+//     note: req.body.note
+//   });
+// });
+// console.log(newData);
+// // console.log('this the id',req.body.id)
+//   req.body.user_availability.forEach(user_availability => {
+//     let data = [
+//       req.body.id,
+//       user_availability.start_timestamp,
+//       req.body.note
+//       ]
+//
+//     let sql = `INSERT INTO slots (user_id, start_timestamp, note)
+//               VALUES ($1,$2,$3);`
+//     pool.query(sql, data)
+//     .then(data => res.status(200))
+//     .catch(err => {
+//       res.status(500).send({status:false})
+//       })
+//     })
+// s
+//     res.send({status:true})
+//   })
+
+router.get('/user', function getUser(req, res, next) {
+  console.log(req.session, req.session.user);
+
+  if(!req.session.user) {
+    req.session.user = { test: 'test' };
+    res.status(403);
+    return res.send('Not logged in');
+  }
+
+  res.send(req.session.user);
+});
+
 // post the userslots to the slots table
 router.post('/slots', async function(req, res) {
-let newData = []
-req.body.user_availability.forEach((start_timestamp) => {
-  newData.push({
-    start_timestamp: start_timestamp,
-    note: req.body.note
-  });
-});
-console.log(newData);
-// console.log('this the id',req.body.id)
+
+  console.log("req.session");
+  console.log(req.session);
+
   req.body.user_availability.forEach(user_availability => {
     let data = [
-      req.body.id,
+      req.session.passport.user,
       user_availability.start_timestamp,
       req.body.note
       ]
-
+      console.log(data);
     let sql = `INSERT INTO slots (user_id, start_timestamp, note)
               VALUES ($1,$2,$3);`
     pool.query(sql, data)
@@ -85,7 +122,6 @@ console.log(newData);
       res.status(500).send({status:false})
       })
     })
-s
     res.send({status:true})
   })
 
