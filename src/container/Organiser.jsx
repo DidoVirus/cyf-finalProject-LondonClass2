@@ -23,10 +23,3 @@ return (
 )}
 
 export default Organiser;
-
-{/* <div className="submit pb-5">
-<Button  onClick={() =>{
-fetch('http://localhost:2500/auth/sloted',{ method: 'post',body:JSON.stringify(123)})
-.then(response => {console.log(response)} )
-.catch( error => {console.log('error occur', error);
-})}} button={"SUBMIT"} /> */}
