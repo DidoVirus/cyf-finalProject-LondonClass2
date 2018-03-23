@@ -3,6 +3,7 @@ const passport = require('passport');
 var bodyParser = require('body-parser');
 var dbs = require('../config/db.js');
 var pool = dbs.getPool();
+const url = require('url');
 
 // auth login to return the logining page
 router.get('/login', (req, res) => {
@@ -18,6 +19,12 @@ res.redirect('/');
 
 router.get('/meeting', (req, res) => {
 res.redirect('http://localhost:3000/meeting');
+});
+
+router.get('/user-details', (req, res) => {
+  console.log("USER DETAILS");
+  console.log(req.user);
+  res.status(200).send({ user: req.user });
 });
 
 // auth github to call github to authoticate
@@ -68,9 +75,9 @@ router.post('/verif', function(req, res) {
             if(error){
               return console.log('am the ',error);
             }
+
             else{
                   res.redirect('http://localhost:3000/dashboard');
-        };
 
 };
 };
@@ -80,6 +87,7 @@ router.post('/verif', function(req, res) {
 });
 
 //handling the call back redirect from github
+
 router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login'}),
 function(req, res) {
 var user_id1 = req.user.github_id;
