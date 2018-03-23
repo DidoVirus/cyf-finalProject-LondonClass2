@@ -10,6 +10,9 @@ import Dashboard from './container/Dashboard.jsx';
 import Meeting from './container/Meeting.js';
 import {Displayslots} from './container/Displayslots.js';
 import Organiser from './container/Organiser.jsx';
+import OrganasirInterface from './container/OrganasirInterface'
+import './index.css';
+import './App.css'
 
 
 const App = () => (
@@ -21,6 +24,7 @@ const App = () => (
       <Route path="/meeting" component={Meeting} />
       <Route path="/Displayslots" component={Displayslots} />
       <Route path="/organiser" component={Organiser} />
+      <Route path="/orgInter" component={OrganasirInterface} />
 
     </div>
   </BrowserRouter>
