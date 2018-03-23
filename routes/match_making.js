@@ -111,13 +111,7 @@ router.post('/ss', async function(req, res){
   })
 
   res.send({status:true})
-  
+
 })
-
-
-
-
-
-
 
 module.exports = router

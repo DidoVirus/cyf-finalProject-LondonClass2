@@ -15,9 +15,4 @@ router.get('/', authCheck, (req, res) => {
     console.log("hello there",req.user);
 });
 
-// route.get('/slots',{req,res)
-//
-// })
-
-
 module.exports = router;

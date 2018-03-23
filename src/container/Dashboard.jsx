@@ -17,8 +17,6 @@ return (
         <div className="pl-4">
             <h2 className="p-4">DASHBOARD</h2>
             <Image />
-            {/* <img src={user.github_avatar_url} /> <br/> */}
-
             <p className="p-4">You have no upcoming meeting conformed.</p>
             <a className="text-primary pl-4">Please Book here</a>
         </div>

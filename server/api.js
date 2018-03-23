@@ -14,7 +14,7 @@ var cors = require('cors')
 var slots = require('../routes/slots');
 var match_making = require('../routes/match_making');
 var session = require('express-session');
-
+var getslots=require('../routes/getslots')
 //using app as express
 var app = express();
 
@@ -45,8 +45,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next) {
-  //res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
   next();
 });
 
@@ -58,14 +57,11 @@ app.get('/', (req, res) => {
 app.post('/', function(req, res, next) {
  // Handle the post for this route
 });
-app.use('/api', slots);
+app.get('/api/slots', getslots.slots);
 app.use('/api', match_making);
 
 //using the auth for routes
 app.use('/auth', authRoutes);
-//app.use('/dashBoard', dashBoardRoutes);
-//app.use('/slots', slots);
-
 
 
 //setting up port

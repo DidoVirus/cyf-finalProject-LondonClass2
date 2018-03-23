@@ -7,7 +7,7 @@ import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import Button from "../components/Button.js";
 import { Form, FormControl } from 'react-bootstrap';
-
+import { NavLink} from 'react-router-dom';
 
 
 class Meeting extends Component {
@@ -68,7 +68,7 @@ render () {
                     <Calender getData={ this.getData }/>
                 </div>
                 <div className="submit pb-5">
-                    <Button  onClick={ this.getSlots} button={"SUBMIT"} />
+                    <NavLink to="/Displayslots"><Button  onClick={ this.getSlots} button={"SUBMIT"} /></NavLink>
                 </div>
             </div>
         </div>
