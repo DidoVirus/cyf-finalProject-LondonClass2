@@ -1,1 +1,31 @@
 
+#cardImageStudent{
+    width: 130px;
+    height: auto;
+  }
+  .cardsAvailable{
+    font-size: 1em;
+    max-width: 150px;
+    margin: 10px;
+    padding: 10px
+  }
+  .cardInactive{
+    background-color: black;
+    font-size: 1em;
+    max-width: 150px;
+    margin: 10px;
+    padding: 10px
+  }
+  .mentorsSection{
+    margin-top: 60px
+  }
+  .timestamps{
+    height:80px ;
+    background-color:rgba(238, 238, 238, 0.92);
+    padding: 3px
+  }
+  .card-title{
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+  }
