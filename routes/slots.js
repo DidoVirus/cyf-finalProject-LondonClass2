@@ -39,6 +39,8 @@ router.get('/user', function getUser(req, res, next) {
   res.send(req.session.user);
 });
 
+
+
 // post the userslots to the slots table
 router.post('/slots', async function(req, res) {
 
@@ -50,7 +52,7 @@ router.post('/slots', async function(req, res) {
       user_availability.start_timestamp,
       req.body.note
       ]
-      console.log(data);
+      console.log("am all your",data);
     let sql = `INSERT INTO slots (user_id, start_timestamp, note)
               VALUES ($1,$2,$3);`
     pool.query(sql, data)

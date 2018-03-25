@@ -32,20 +32,25 @@ getSlots = async () =>{
   })
 }
 
+
+
 render(){
-  console.log(this.state.slots)
+  console.log("am",this.state.slots)
   return(
     <div className="container-fluid border border-dark rounded p-2">
         <div>
             <Header title={"CONVIENT"}/>
         </div>
         <div className="pl-5">
-            <div className="xpl-4">
+            <div className="pl-4">
                 <h2 className="p-4">BOOKED AVAILABILITY</h2>
                 <Image />
 
                 <p className="p-4">HERE YOUR UPCOMING AVAILABILITY</p>
-                  <p>{this.state.slots.map(time => time.start_timestamp )}</p>
+                  {this.state.slots.map(time =>
+                    <img      src={time.github_avatar_url }/>
+                    )}
+
             </div>
             <div className="col-md-5 submit pb-5">
              <a className="btn btn-primary btn-lg mx-auto" href="http://localhost:2500/auth/meeting">BOOK MEETING</a>
