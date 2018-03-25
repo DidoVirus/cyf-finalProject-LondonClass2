@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import "./Home.css";
-import Button from "../components/Button.js";
+
+// import Button from "../components/Button.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import { NavLink} from 'react-router-dom';
 import Image from "../components/Image.js";
+import { Container, Card, CardTitle, CardText, Row, Col, Button } from 'reactstrap';
+import OrganasirInterface from "./OrganasirInterface.js"
+import moment from 'moment';
 
 export class Displayslots extends React.Component {
   constructor (props){
@@ -21,41 +25,53 @@ export class Displayslots extends React.Component {
 
 getSlots = async () =>{
   const fetchSlots=  await fetch('http://localhost:2500/api/slots',{
-      method: 'GET',
-      credentials: 'include',
-      mode:'cors',
+          method: 'GET',
+          credentials: 'include',
+          mode:'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+    }})
 
-  })
-  const responseSlots = await fetchSlots.json()
+  const responseSlots = await fetchSlots.json();
   this.setState({
     slots:responseSlots.rows
   })
 }
 
-render(){
-  console.log(this.state.slots)
-  return(
-    <div className="container-fluid border border-dark rounded p-2">
-        <div>
-            <Header title={"CONVIENT"}/>
-        </div>
-        <div className="pl-5">
-            <div className="xpl-4">
-                <h2 className="p-4">BOOKED AVAILABILITY</h2>
-                <Image />
+render() {
+  console.log(this.state.slots.map(time => time.github_username))
+  let username = this.state.slots.map(time => time.github_username);
+  let images = this.state.slots.map(time => time.github_avatar_url);
+    console.log('am',username)
+    let name = username[0]
+    let image = images[0]
 
-                <p className="p-4">HERE YOUR UPCOMING AVAILABILITY</p>
-                  <p>{this.state.slots.map(time => time.start_timestamp )}</p>
-            </div>
-            <div className="col-md-5 submit pb-5">
-             <a className="btn btn-primary btn-lg mx-auto" href="http://localhost:2500/auth/meeting">BOOK MEETING</a>
-             <Button  onClick={ this.getSlots} button={"SUBMIT"} />
-           </div>
-            <div>
-                <Footer />
-            </div>
-        </div>
-    </div>
+  return (
+      <Container>
+          <div>
+              <h1> booked slots for {name}</h1>
+                <img id='userimage' src={image} alt='picture profile' />
+
+          </div>
+          <Row>
+              {this.state.slots.map(data =>
+              <Card className= "slotsback" key={data.user_id} >
+
+                      <CardText>
+                          available times :
+                              <p className="slotsviews">
+                                      {moment(data.start_timestamp).format("dddd, MMMM Do , hh,a")}
+                              </p>
+                      </CardText>
+
+                  </Card>
+              )}
+          </Row>
+
+
+      </Container>
+
   )
 }
 }

@@ -34,7 +34,7 @@ export default class OrganasirInterface extends Component {
         responseAllSlots.map(role => role.role_student ? getStudents.push(role)
             : role.role_mentor ? getMentors.push(role)
                 : null)
-        let sortedStudends = getStudents.sort((a,b) => a.start_timestamp> b.start_timestamp)        
+        let sortedStudends = getStudents.sort((a,b) => a.start_timestamp> b.start_timestamp)
         this.setState({
             students: sortedStudends,
             mentors: getMentors
@@ -72,7 +72,7 @@ export default class OrganasirInterface extends Component {
                 <Row>
                     {this.state.students.map(data =>
                     <Card className={moment() >= moment(data.start_timestamp) ? 'cardsAvailable cardInactive' : "cardsAvailable" } key={data.user_id} >
-                    
+
                             <CardTitle>
                                 {data.github_username}
                             </CardTitle>
@@ -80,7 +80,7 @@ export default class OrganasirInterface extends Component {
                             <CardText>
                                 available times :
                                     <p className="timestamps">
-                                            {moment(data.start_timestamp).format("dddd, MMMM Do , hh,a")}                                          
+                                            {moment(data.start_timestamp).format("dddd, MMMM Do , hh,a")}
                                     </p>
                             </CardText>
                             <Button onClick={this.handleDeleteSlot} value={data.slot_id}>x</Button>
