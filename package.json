@@ -7,6 +7,7 @@
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "cookie-session": "^2.0.0-beta.3",
+    "cool-ascii-faces": "1.3.4",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
@@ -39,5 +40,17 @@
     "babel-cli": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "redux-devtools": "^3.4.1"
-  }
+  },
+  "description": "The most intelligent matchmaking system for mentors and students that maximises convenience and minimises waste.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DidoVirus/cyf-finalProject-LondonClass2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DidoVirus/cyf-finalProject-LondonClass2/issues"
+  },
+  "homepage": "https://github.com/DidoVirus/cyf-finalProject-LondonClass2#readme"
 }

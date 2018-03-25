@@ -3,7 +3,6 @@ const passport = require('passport');
 var bodyParser = require('body-parser');
 var dbs = require('../config/db.js');
 var pool = dbs.getPool();
-const url = require('url');
 
 // auth login to return the logining page
 router.get('/login', (req, res) => {
@@ -21,12 +20,6 @@ router.get('/meeting', (req, res) => {
 res.redirect('http://localhost:3000/meeting');
 });
 
-router.get('/user-details', (req, res) => {
-  console.log("USER DETAILS");
-  console.log(req.user);
-  res.status(200).send({ user: req.user });
-});
-
 // auth github to call github to authoticate
 router.get('/github', passport.authenticate('github', {
      scope:['profile']
@@ -40,34 +33,6 @@ router.get('/verif', function(req, res, next) {
 router.get('/verifAgain', function(req, res, next) {
   res.render('verifAgain',{ user: req.user })
 });
-<<<<<<< HEAD
-//get slots data
-router.post('/sloted', function(req, res, next) {
-  pool.connect((error, db, done2)=>{
-  if(error){
-    return console.log(error);
-  }
-  // db.query('INSERT INTO slots (start_timestamp,note) VALUES ($1, $2) RETURNING *',
-  // [req.body.start_timestamp,req.body.note]
-
-    else{
-      console.info('doing stuff')
-      db.query(`UPDATE slots
-        SET start_timestamp=$1, note=$2
-        WHERE user_id=71;`,
-        [req.body.user_availability[0].start_timestamp,req.body.note],(error, insertProfile)=>{
-            if(error){
-              return console.log(error);
-            } else {
-              console.log("am the")
-            }
-            //done(null,insertProfile.rows[0]);
-          })
-        }
-    })
-  res.redirect('http://localhost:3000/dashboard');
-});
-=======
 // //get slots data
 // router.post('/slots', function(req, res, next) {
 //   console.log('am user',req.body.start_timestamp[0].start_timestamp);
@@ -97,7 +62,6 @@ router.post('/sloted', function(req, res, next) {
 //     })
 //   res.redirect('http://localhost:3000/');
 // });
->>>>>>> 0f828e802d59940827b0e14ef9b6bc0007abe197
 
 //auth verif to capture what the user verification code
 router.post('/verif', function(req, res) {
@@ -135,39 +99,9 @@ router.post('/verif', function(req, res) {
             if(error){
               return console.log('am the ',error);
             }
-<<<<<<< HEAD
-            else {
-              db.query('INSERT INTO slots (user_id) VALUES ($1) RETURNING *',
-              [user_id] ,(error, insertProfile)=>{
-                if(error){
-                  return console.log(error);
-                }
-                else{
-                  // res.redirect('/');
-                      // res.redirect('http://localhost:3000/dashboard');
-                      res.redirect(url.format({
-                        pathname:"http://localhost:3000/dashboard",
-                        // pathname:"/",
-                        query:{user: req.user} ,
-                      }));
-          }})
-        };
-=======
             else{
                   res.redirect('http://localhost:3000/dashboard');
-        }
-        //     else {
-        //       db.query('INSERT INTO slots (user_id) VALUES ($1) RETURNING *',
-        //       [user_id] ,(error, insertProfile)=>{
-        //         if(error){
-        //           return console.log(error);
-        //         }
-        //         else{
-        //               res.redirect('http://localhost:3000/dashboard');
-        //     }
-        //   })
-        // };
->>>>>>> 0f828e802d59940827b0e14ef9b6bc0007abe197
+        };
 
 };
 };
@@ -175,39 +109,12 @@ router.post('/verif', function(req, res) {
 };
 });
 });
-//     else {
-//       db.query('INSERT INTO slots (user_id) VALUES ($1) RETURNING *',
-//       [user_id] ,(error, insertProfile)=>{
-//         if(error){
-//           return console.log(error);
-//         }
-//         else{
-//               res.redirect('http://localhost:3000/dashboard');
-//     }
-//   })
-// };
-
-// };
-// };
-// });
-// };
-// });
-// });
 
 //handling the call back redirect from github
-<<<<<<< HEAD
-router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login' }), (req, res) => {
-    console.log("me t",req.user.github_id);
-    // const user = 'Basic ' + req.user.github_id +':'+ req.user.github_username
-    // const userencrypted = btao('Bearer ' + user)
-    res.redirect('http://localhost:3000/activation');
-
-=======
 router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login'}),
 function(req, res) {
 var user_id1 = req.user.github_id;
-
-  // console.log("am userrrrr",req.user.user_id;)
+ //console.log("am userrrrr",req.user.github_id);
   pool.connect((error, db, done)=>{
     if(error){
       return console.log(error);
@@ -220,23 +127,37 @@ var user_id1 = req.user.github_id;
           return console.log(error);
         }
     //updating the user table with user verification cod
-        else if (!user.rowCount){
-            res.redirect('http://localhost:3000/Dashboard');
+        else if (user.rows[0].role_student===null || user.rows[0].role_mentor===null || user.rows[0].role_organiser===null){
+            res.redirect('http://localhost:3000/Activation');
+
           }
            else{
-    res.redirect('http://localhost:3000/Activation');
-  }
-  // Successful authentication, redirect home.
+    res.redirect('http://localhost:3000/Dashboard');
+  };
 
   });
 }
 })
->>>>>>> 0f828e802d59940827b0e14ef9b6bc0007abe197
 });
 
-//handling the call back redirect from github
-// router.get('/github/redirect', passport.authenticate('github',{ failureRedirect: '/login',successRedirect:'http://localhost:3000/Activation' }), (req, res) => {
-//     res.send(req.user);
-// });
+router.get('/slots',function(req, res) {
+  console.log("am req.session 2",req.session.passport.user);
+  pool.connect((error,db,done)=>{
+    if(error){
+      return console.log(error);
+    }else{
+      db.query('SELECT * FROM slots WHERE user_id=$!',[req.session.passport.user],(error,user)=>{
+        done();
+        if(error){
+          return console.log(error);
+        }else{
+        res.redirect('http://localhost:3000/Dashboard');
+      }
+    })
+    }
+  })
+})
+
+
 
 module.exports = router;

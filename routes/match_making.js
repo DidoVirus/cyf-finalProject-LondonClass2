@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
-var dbs = require('./db.js');
+var dbs = require('../config/db.js');
 var pool = dbs.getPool();
 var moment = require('moment');
 moment.locale('en-GB')
@@ -20,7 +20,6 @@ let booked_availability = []
 
 
 router.post('/ss', async function(req, res){
-
   const sqlStudent = `SELECT slot_id, start_timestamp, note
               FROM users INNER JOIN slots USING(user_id)
               WHERE users.role_student = TRUE
@@ -98,7 +97,7 @@ router.post('/ss', async function(req, res){
         booked_availability[i].note
       ]
 
-    console.log("slots to post" + slots)
+    console.log("slots to post: " + slots)
     let convenient = `INSERT INTO convenient_availability ( mentor_slot_id, student_slot_id, convenient_time, student_note)
                       VALUES ($1,$2,$3,$4);`
     pool.query(convenient, slots)
@@ -111,7 +110,7 @@ router.post('/ss', async function(req, res){
   })
 
   res.send({status:true})
-  
+
 })
 
 

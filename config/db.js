@@ -24,7 +24,7 @@ pool.connect((error, db, done)=>{
         return console.log(error);
       }
       else {
-        console.log(table);
+        console.log("connection to DB is successful");
       }
     })
   }
