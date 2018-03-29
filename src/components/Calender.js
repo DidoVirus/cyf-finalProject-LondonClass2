@@ -38,8 +38,16 @@ class Calender extends Component {
         var day5 = moment().add(4, 'days').format("DD/MM/YYYY");
         var day6 = moment().add(5, 'days').format("DD/MM/YYYY");
         var day7 = moment().add(6, 'days').format("DD/MM/YYYY");
+        var day8 = moment().add(7, 'days').format("DD/MM/YYYY");
+        var day9 = moment().add(8, 'days').format("DD/MM/YYYY");
+        var day10 = moment().add(9, 'days').format("DD/MM/YYYY");
+        var day11 = moment().add(10, 'days').format("DD/MM/YYYY");
+        var day12 = moment().add(11, 'days').format("DD/MM/YYYY");
+        var day13 = moment().add(12, 'days').format("DD/MM/YYYY");
+        var day14 = moment().add(13, 'days').format("DD/MM/YYYY");
+
         const noDays = 7;
-        const dayInTheWeek = [day1,day2,day3,day4,day5,day6,day7];
+        const dayInTheWeek = [day1,day2,day3,day4,day5,day6,day7,day8,day9,day10,day11,day12,day13,day14];
         const timeInDay=["9AM-12PM","12PM-6PM","6PM-8PM"];
         // this.props.getData(this.state.collectData)
         // console.log(this.state.collectData);

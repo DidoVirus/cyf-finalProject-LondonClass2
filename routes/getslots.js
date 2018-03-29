@@ -8,8 +8,7 @@ moment.locale('en-GB')
 
 
 
-exports.slots= router.get('/api/slots',function(req, res) {
-  console.log("am req.session 2",req.session.passport.user);
+exports.slots= router.get('/api/slots',function(req, res) {;
   pool.connect((error,db,done)=>{
     if(error){
       return console.log(error);

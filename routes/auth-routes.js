@@ -37,15 +37,11 @@ router.get('/verifAgain', function (req, res, next) {
 
 //get slots data
 router.post('/slots', function (req, res, next) {
-  console.log('am user', req.body.start_timestamp[0].start_timestamp);
-  console.log('hey buddie', req.session);
-  console.log('hey user', req.user);
   pool.connect((error, db, done2) => {
     if (error) {
       return console.log(error);
     }
-    // db.query('INSERT INTO slots (start_timestamp,note) VALUES ($1, $2) RETURNING *',
-    // [req.body.start_timestamp,req.body.note]
+
 
     else {
       console.info('doing stuff')

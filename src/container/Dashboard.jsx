@@ -8,7 +8,6 @@ import { NavLink} from 'react-router-dom';
 import Image from "../components/Image";
 
 function Dashboard(props){
-  console.log("kiya",props.user);
 return (
 <div className="container-fluid border border-dark rounded p-2">
     <div>
