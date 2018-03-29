@@ -11,8 +11,9 @@ export default class OrganiserInterface extends Component {
         students: [],
         mentors: [],
         userTimestamps: [],
-        booked:[],
-        sent:false
+        booked: [],
+        sent: false,
+        booked: []
     }
 
 
@@ -65,39 +66,41 @@ export default class OrganiserInterface extends Component {
         }
     }
 
-    handeEmail=async (sEmail,mEmail,slot, note) =>{
+    handeEmail = async (sEmail, mEmail, slot, note) => {
         const fetchEmail = await fetch('http://localhost:2500/api/sendmail', {
-                method: 'POST',
-                credentials: 'include',
-                mode: 'cors',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }, body: JSON.stringify({
-                    "studentEmail": sEmail,
-                    "mentorEmail":mEmail,
-                    "slotTime":slot,
-                    "note":note
-                })
+            method: 'POST',
+            credentials: 'include',
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }, body: JSON.stringify({
+                "studentEmail": sEmail,
+                "mentorEmail": mEmail,
+                "slotTime": slot,
+                "note": note
+            })
 
-            })
-           
-            this.setState({
-                sent:true
-            })
+        })
+
+        this.setState({
+            sent: true
+        })
 
     }
 
 
 
+
     render() {
+        console.log(this.state.booked)
         return (
             <Container>
                 <div>
                     <h1> Studenst Avalibility</h1>
                 </div>
                 <Row>
-                    {this.state.students.map((data , index) =>
+                    {this.state.students.map((data, index) =>
                         <Card className={moment() >= moment(data.start_timestamp) ? 'cardsAvailable cardInactive' : "cardsAvailable"} key={index} >
 
                             <CardTitle>
@@ -105,13 +108,13 @@ export default class OrganiserInterface extends Component {
                             </CardTitle>
                             <img id='cardImageStudent' src={data.github_avatar_url} alt='picture profile' />
                             <CardText>
-                                
+
                                 available times :
                                     <p className="timestamps">
                                     {moment(data.start_timestamp).format("dddd, MMMM Do , hh,a")}
                                 </p>
                                 <p>{data.note}</p>
-                               
+
                             </CardText>
                             <Button onClick={this.handleDeleteSlot} value={data.slot_id}>Delete the slot</Button>
 
@@ -146,31 +149,30 @@ export default class OrganiserInterface extends Component {
                         <h1>Match</h1>
                     </div>
                     <Row >
-                        {this.state.students.map(student => this.state.mentors.map(mentor =>
+                        {this.state.students.map((student, index) => this.state.mentors.map((mentor, index2) =>
                             student.start_timestamp === mentor.start_timestamp ?
-                                (this.state.booked.push(student),
-                                <Card className={this.state.sent ? 'cardsAvailable cardInactive' : 'cardsAvailable' } key={student.user_id + mentor.user_id}>
-                                    <CardTitle>
-                                        Match
-                                    </CardTitle>
-                                    <img src={mentor.github_avatar_url} id='cardImageStudent' />
 
-                                    <CardText>
-                                        This sudent: <span className="matchStudent" >{student.github_username}</span> match with this mentor:<span className="matchStudent" >{mentor.github_username}</span>
-                                    </CardText>
-                                    <img src={student.github_avatar_url} id='cardImageStudent' />
-                                    <CardText className="timestamps" >
-                                        available times : <span className="matchStudent" > {moment(mentor.start_timestamp).format("dddd, MMMM Do , hh,a")}</span>
-                                    </CardText>
-                                    <Button onClick={(e)=> this.handeEmail(student.email , mentor.email ,moment(mentor.start_timestamp).format("dddd, MMMM Do , hh,a") , student.note)} >send email</Button>
+                                        <Card className={this.state.sent ? 'cardsAvailable cardInactive' : 'cardsAvailable'} key={index}>
+                                            <CardTitle>
+                                                Match
+                                            </CardTitle>
+                                            <img src={mentor.github_avatar_url} id='cardImageStudent' />
 
-                                </Card>)
+                                            <CardText>
+                                                This sudent: <span className="matchStudent" >{student.github_username}</span> match with this mentor:<span className="matchStudent" >{mentor.github_username}</span>
+                                            </CardText>
+                                            <img src={student.github_avatar_url} id='cardImageStudent' />
+                                            <CardText className="timestamps" >
+                                                available times : <span className="matchStudent" > {moment(mentor.start_timestamp).format("dddd, MMMM Do , hh,a")}</span>
+                                            </CardText>
+                                            <Button onClick={(e) => this.handeEmail(student.github_email, mentor.github_email, moment(mentor.start_timestamp).format("dddd, MMMM Do , hh,a"), student.note)} >send email</Button>
 
-                                : ''
+                                        </Card> : "")
 
-                        ))}
+                        )}
                     </Row>
                 </Col>
+
 
 
 
