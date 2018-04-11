@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import "./Home.css";
-import Button from "../components/Button.js";
+// import Button from "../components/Button.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import { NavLink} from 'react-router-dom';
 import Image from "../components/Image.js";
+import { Container, Card, CardTitle, CardText, Row, Col, Button } from 'reactstrap';
+import moment from 'moment';
 
 export class Displayslots extends React.Component {
   constructor (props){
@@ -18,6 +20,14 @@ export class Displayslots extends React.Component {
   componentDidMount(){
     this.getSlots()
 }
+
+handleLogOut = async () => {
+           const logingout = await fetch('http://localhost:2500/auth/logout', {
+               method: 'GET',
+               credentials: 'include',
+               mode: 'cors',
+           })
+   }
 
 getSlots = async () =>{
   const fetchSlots=  await fetch('http://localhost:2500/api/slots',{
@@ -35,10 +45,10 @@ getSlots = async () =>{
 
 
 render(){
-  console.log("am",this.state.slots)
   return(
     <div className="container-fluid border border-dark rounded p-2">
         <div>
+            <NavLink to="/"><Button onClick={this.handleLogOut}>LOG OUT</Button></NavLink>
             <Header title={"CONVIENT"}/>
         </div>
         <div className="pl-5">
