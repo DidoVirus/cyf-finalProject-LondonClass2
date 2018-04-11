@@ -5,9 +5,9 @@ import Button from "../components/Button.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import { NavLink} from 'react-router-dom';
-import Image from "../components/Image.js";
 
-function Dashboard(){
+function Dashboard(props){
+  console.log("kiya",props.user);
 return (
 <div className="container-fluid border border-dark rounded p-2">
     <div>
@@ -16,12 +16,12 @@ return (
     <div className="pl-5">
         <div className="pl-4">
             <h2 className="p-4">DASHBOARD</h2>
-            <Image />
             <p className="p-4">You have no upcoming meeting conformed.</p>
             <a className="text-primary pl-4">Please Book here</a>
+
         </div>
         <div className="col-md-5 submit pb-5">
-         <a className="btn btn-primary btn-lg mx-auto" href="http://localhost:2500/auth/meeting">BOOK MEETING</a>
+         <NavLink to={"/Meeting/" + props.user}><Button button={"Book a meeting"}  /></NavLink>
         </div>
         <div className="col-md-5  submit pb-5">
         <NavLink to="/Meeting"><Button  button={"Mark availability"}/></NavLink>
