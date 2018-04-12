@@ -19,7 +19,8 @@ exports.getAllSlots = router.get('/api/getslots', (req, res) => {
                 if (err) {
                     console.log(err)
                 } else {
-                    res.json(table.rows)
+                    var user = req.user
+                    res.json([table.rows, user])
                     done()
                 }
 
@@ -27,6 +28,7 @@ exports.getAllSlots = router.get('/api/getslots', (req, res) => {
 
 
     })
+
 })
 
 exports.getSlotsById = router.get('/slots/:id', (req, res) => {
@@ -205,5 +207,22 @@ exports.sendEmail = router.post('/api/sendmail', (req, res) => {
 
     })
 
+})
+exports.logOut = router.get('/api/logout' , (req,res,next) =>{
+    console.log('first' , req.user)
+    if(req.isAuthenticated()){
+        req.session.destroy;
+        req.user=null
+        res.redirect('/')
+        console.log('you loged out' , req.user)
+    }if(req.isUnauthenticated()){
+        console.log('you have to log in')
+    }
+    
+    // res.json({status : 'you sucssefuly loged out'})
+   
+    
+    
+    
 })
 

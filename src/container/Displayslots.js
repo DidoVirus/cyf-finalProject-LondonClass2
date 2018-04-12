@@ -20,10 +20,14 @@ export class Displayslots extends React.Component {
 }
 
 getSlots = async () =>{
-  const fetchSlots=  await fetch('http://localhost:25 00/api/slots',{
+  const fetchSlots=  await fetch('http://localhost:2500/api/slots',{
       method: 'GET',
       credentials: 'include',
       mode:'cors',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    }
 
   })
   const responseSlots = await fetchSlots.json()
