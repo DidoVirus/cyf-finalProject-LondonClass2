@@ -51,13 +51,13 @@ class Meeting extends Component {
   }
 render () {
     return (
-<div className="container-fluid border border-dark rounded p-4">
+<div className="container-fluid ">
     <div>
         <Header title={"CONVENIENT"}/>
     </div>
     <div className="pl-4">
         <div className="pl-4 col-md-5">
-            <h2 className="p-4">Meeting Request</h2>
+            <h5 className="p-4">Meeting Request</h5>
             <p className="pl-4">What Would Like To Discuss?</p>
             <div className="pl-4">
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={this.state.value} onChange={this.handleChange}/>

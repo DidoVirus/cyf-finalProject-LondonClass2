@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Container, Card, CardTitle, CardText, Row, Col, Button } from 'reactstrap';
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import moment from 'moment';
-// import dbs from '../../config/db'
 
-// var pool = dbs.getPool()
 
+ var now = moment()
 
 export default class OrganiserInterface extends Component {
     state = {
@@ -18,8 +19,7 @@ export default class OrganiserInterface extends Component {
 
 
     componentDidMount() {
-
-        this.getAllSlots()
+        this.getAllSlots()  
     }
 
     getAllSlots = async () => {
@@ -35,12 +35,14 @@ export default class OrganiserInterface extends Component {
         const responseAllSlots = await fetchAllSlots.json();
         let getStudents = [];
         let getMentors = []
+        let finalStudent=[]
         responseAllSlots[0].map(role => role.role_student ? getStudents.push(role)
             : role.role_mentor ? getMentors.push(role)
                 : null)
         let sortedStudends = getStudents.sort((a, b) => a.start_timestamp > b.start_timestamp)
+        let removedPastSLot = sortedStudends.map(slots => moment(slots.start_timestamp) > now ? finalStudent.push(slots) : '' )
         this.setState({
-            students: sortedStudends,
+            students: finalStudent,
             mentors: getMentors,
             user: responseAllSlots[1]
         })
@@ -104,15 +106,18 @@ export default class OrganiserInterface extends Component {
 
     render() {
 
-        if (!this.state.user.role_organiser) {
+        if (!this.state.user.role_organiser || this.state.user == null) {
             return (
-                <h1> you have to be an organiser to see access to this page</h1>
+                <h1> you have to be an organiser to have access to this page</h1>
             )
         } else {
             return (
                 <Container>
+                    <Header title={"CONVIENT"}/>
+                    <div className="pl-4"></div>
+                    <h2 className='p-4'>DASHBOARD</h2>
                     <div>
-                        <h1> Studenst Avalibility</h1>
+                        <h1>Students’ Availability</h1>
                     </div>
                     <Row>
                         {this.state.students.map((data, index) =>
@@ -126,7 +131,7 @@ export default class OrganiserInterface extends Component {
 
                                     available times :
                                     <p className="timestamps">
-                                        {moment(data.start_timestamp).format("dddd, MMMM Do , hh,a")}
+                                        {moment(data.start_timestamp).format("dddd, Do MMMM  , hha")}
                                     </p>
                                     <p>{data.note}</p>
 
@@ -139,7 +144,7 @@ export default class OrganiserInterface extends Component {
                     <Col className="mentorsSection">
                         <hr />
                         <div>
-                            <h1> Mentors Avalibility</h1>
+                            <h1> Mentors’ Availability</h1>
                         </div>
                         <Row>
                             {this.state.mentors.map((mentor, index) =>
@@ -161,7 +166,7 @@ export default class OrganiserInterface extends Component {
 
                     <Col className="mentorsSection">
                         <div>
-                            <h1>Match</h1>
+                            <h1>Upcoming Meetings</h1>
                         </div>
                         <Row >
                             {this.state.students.map((student, index) => this.state.mentors.map((mentor, index2) =>
@@ -174,7 +179,7 @@ export default class OrganiserInterface extends Component {
                                         <img src={mentor.github_avatar_url} id='cardImageStudent' />
 
                                         <CardText>
-                                            This sudent: <span className="matchStudent" >{student.github_username}</span> match with this mentor:<span className="matchStudent" >{mentor.github_username}</span>
+                                            Sudent: <span className="matchStudent" >{student.github_username}</span> match with mentor: <span className="matchStudent" >{mentor.github_username}</span>
                                         </CardText>
                                         <img src={student.github_avatar_url} id='cardImageStudent' />
                                         <CardText className="timestamps" >
@@ -190,7 +195,8 @@ export default class OrganiserInterface extends Component {
 
 
 
-                    <Button onClick={this.handleLogOut} >logOut </Button>
+                    {/* <Button onClick={this.handleLogOut} >logOut </Button> */}
+                    <Footer/>
 
                 </Container>
 

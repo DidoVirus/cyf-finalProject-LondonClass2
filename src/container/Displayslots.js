@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Col , Row} from 'reactstrap'
 import "./Home.css";
 import Button from "../components/Button.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import { NavLink} from 'react-router-dom';
 import Image from "../components/Image.js";
+import moment from 'moment'
 
 export class Displayslots extends React.Component {
   constructor (props){
@@ -49,12 +51,19 @@ render(){
                 <Image />
 
                 <p className="p-4">HERE YOUR UPCOMING AVAILABILITY</p>
-                  <p>{this.state.slots.map(time => time.start_timestamp )}</p>
+                <Row >
+                {this.state.slots.map(time =>
+                <Col>
+                  <p className='timeSlot'> {moment(time.start_timestamp).format("dddd, Do MMMM  , hha")}</p>
+                  </Col>
+                  )}
+                  
+                  </Row>
             </div>
-            <div className="col-md-5 submit pb-5">
-             <a className="btn btn-primary btn-lg mx-auto" href="http://localhost:2500/auth/meeting">BOOK MEETING</a>
-             <Button  onClick={ this.getSlots} button={"SUBMIT"} />
-           </div>
+            <Col>
+             <a className="col btn btn-primary mx-auto" href="http://localhost:2500/auth/meeting">BOOK MEETING</a>
+             {/* <Button  onClick={ this.getSlots} button={"SUBMIT"} /> */}
+           </Col>
             <div>
                 <Footer />
             </div>

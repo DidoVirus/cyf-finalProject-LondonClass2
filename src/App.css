@@ -39,3 +39,13 @@
     font-weight: 800;
     color: rgba(221, 86, 86, 0.867)
   }
+  .conv{
+    margin-top: 50px
+  }
+  .btn_cal{
+    font-size: 0.7em
+  }
+  .timeSlot{
+    background-color:#ddd;
+    padding:10px
+  }

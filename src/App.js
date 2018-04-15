@@ -24,7 +24,7 @@ const App = () => (
       <Route path="/meeting" component={Meeting} />
       <Route path="/Displayslots" component={Displayslots} />
       <Route path="/organiser" component={Organiser} />
-      <Route path="/orgInter" component={OrganiserInterface} />
+      <Route path="/admin" component={OrganiserInterface} />
 
     </div>
   </BrowserRouter>
