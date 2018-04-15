@@ -6,6 +6,7 @@ import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import { NavLink} from 'react-router-dom';
 
+
 function Dashboard(props){
   console.log("kiya",props.user);
 return (

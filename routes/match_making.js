@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
-var dbs = require('./db.js');
+var dbs = require('../config/db.js');
 var pool = dbs.getPool();
 var moment = require('moment');
 moment.locale('en-GB')

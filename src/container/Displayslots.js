@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import "./Home.css";
+
 // import Button from "../components/Button.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
@@ -31,17 +32,19 @@ handleLogOut = async () => {
 
 getSlots = async () =>{
   const fetchSlots=  await fetch('http://localhost:2500/api/slots',{
-      method: 'GET',
-      credentials: 'include',
-      mode:'cors',
+          method: 'GET',
+          credentials: 'include',
+          mode:'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+    }})
 
-  })
-  const responseSlots = await fetchSlots.json()
+  const responseSlots = await fetchSlots.json();
   this.setState({
     slots:responseSlots.rows
   })
 }
-
 
 
 render(){
