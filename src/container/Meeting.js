@@ -14,9 +14,8 @@ import { NavLink} from 'react-router-dom';
 class Meeting extends Component {
     constructor(props) {
         super(props);
-        // This is not anybody's change (ghosts did it I think <Ahmed>)
-        // it was like that before "start_timestamp":this.state.collectedData
-        this.state = {collectedData:[],value:""};
+
+        this.state = {collectedData: [],value:""};
         this.getData = this.getData.bind(this);
         this.handleChange = this.handleChange.bind(this);
         console.log(this.state);
@@ -27,6 +26,7 @@ class Meeting extends Component {
   }
     getData(data) {
         this.setState({
+
           collectedData: data,
 
     })
@@ -50,6 +50,7 @@ class Meeting extends Component {
     .catch(err => console.log(err))
   }
 render () {
+  console.log(this.state.collectData)
     return (
 <div className="container-fluid border border-dark rounded p-4">
     <div>

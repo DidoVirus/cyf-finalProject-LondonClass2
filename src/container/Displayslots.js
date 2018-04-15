@@ -8,7 +8,6 @@ import Footer from "../components/Footer.js";
 import { NavLink} from 'react-router-dom';
 import Image from "../components/Image.js";
 import { Container, Card, CardTitle, CardText, Row, Col, Button } from 'reactstrap';
-import OrganasirInterface from "./OrganasirInterface.js"
 import moment from 'moment';
 
 export class Displayslots extends React.Component {
@@ -22,6 +21,14 @@ export class Displayslots extends React.Component {
   componentDidMount(){
     this.getSlots()
 }
+
+handleLogOut = async () => {
+           const logingout = await fetch('http://localhost:2500/auth/logout', {
+               method: 'GET',
+               credentials: 'include',
+               mode: 'cors',
+           })
+   }
 
 getSlots = async () =>{
   const fetchSlots=  await fetch('http://localhost:2500/api/slots',{
@@ -39,39 +46,34 @@ getSlots = async () =>{
   })
 }
 
-render() {
-  console.log(this.state.slots.map(time => time.github_username))
-  let username = this.state.slots.map(time => time.github_username);
-  let images = this.state.slots.map(time => time.github_avatar_url);
-    console.log('am',username)
-    let name = username[0]
-    let image = images[0]
 
-  return (
-      <Container>
-          <div>
-              <h1> booked slots for {name}</h1>
-                <img id='userimage' src={image} alt='picture profile' />
+render(){
+  return(
+    <div className="container-fluid border border-dark rounded p-2">
+        <div>
+            <NavLink to="/"><Button onClick={this.handleLogOut}>LOG OUT</Button></NavLink>
+            <Header title={"CONVIENT"}/>
+        </div>
+        <div className="pl-5">
+            <div className="pl-4">
+                <h2 className="p-4">BOOKED AVAILABILITY</h2>
+                <Image />
 
-          </div>
-          <Row>
-              {this.state.slots.map(data =>
-              <Card className= "slotsback" key={data.user_id} >
+                <p className="p-4">HERE YOUR UPCOMING AVAILABILITY</p>
+                  {this.state.slots.map(time =>
+                    <img      src={time.github_avatar_url }/>
+                    )}
 
-                      <CardText>
-                          available times :
-                              <p className="slotsviews">
-                                      {moment(data.start_timestamp).format("dddd, MMMM Do , hh,a")}
-                              </p>
-                      </CardText>
-
-                  </Card>
-              )}
-          </Row>
-
-
-      </Container>
-
+            </div>
+            <div className="col-md-5 submit pb-5">
+             <a className="btn btn-primary btn-lg mx-auto" href="http://localhost:2500/auth/meeting">BOOK MEETING</a>
+             <Button  onClick={ this.getSlots} button={"SUBMIT"} />
+           </div>
+            <div>
+                <Footer />
+            </div>
+        </div>
+    </div>
   )
 }
 }
