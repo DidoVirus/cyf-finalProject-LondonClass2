@@ -9,12 +9,9 @@ router.get('/login', (req, res) => {
   req.session.user = req.user;
   res.render('login', { user: req.user });
 });
-
-// auth logout to return the logout page
-router.get('/logout', (req, res) => {
+router.get('/logout' , (req,res) =>{
   req.logout();
-  res.redirect('/');
-});
+  });
 
 router.get('/meeting', (req, res) => {
   res.redirect('http://localhost:3000/meeting');
