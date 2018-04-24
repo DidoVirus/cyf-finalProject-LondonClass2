@@ -1,5 +1,4 @@
 
-
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
@@ -30,6 +29,8 @@ router.delete('/slots', async function (req, res) {
   })
 
 router.get('/user', function getUser(req, res, next) {
+  console.log(req.session, req.session.user);
+
   if(!req.session.user) {
     req.session.user = { test: 'test' };
     res.status(403);
@@ -39,8 +40,29 @@ router.get('/user', function getUser(req, res, next) {
   res.send(req.session.user);
 });
 
+router.get('/slots',function(req, res) {
+  console.log("am req.session 2",req.session.passport.user);
+  pool.connect((error,db,done)=>{
+    if(error){
+      return console.log(error);
+    }else{
+      db.query('SELECT * FROM slots INNER JOIN users ON (slots.user_id = users.user_id) AND users.user_id =$1',[req.session.passport.user],(error,user)=>{
+        done();
+        if(error){
+          return console.log(error);
+        }else{
+        res.json(user);
+      }
+    })
+    }
+  })
+})
+
 // post the userslots to the slots table
 router.post('/slots', async function(req, res) {
+
+  console.log("am req.session",req.session.passport.user);
+
   req.body.user_availability.forEach(user_availability => {
     let data = [
       req.session.passport.user,
@@ -58,46 +80,5 @@ router.post('/slots', async function(req, res) {
     })
     res.send({status:true})
   })
-
-
- // define the route organiser user_availability page route
- router.get('/organiser/:id/:user_id', async function(req, res) {
-   const params = [
-      req.params.user_id,
-      weekStart.format(),
-      weekEnd.format()
-    ]
-
-   const sql = `SELECT *
-                FROM slots
-                WHERE user_id = $1
-                AND start_timestamp BETWEEN $2 AND $3`
-
-   const selectSlotsTimeNote = row => ({
-     start_timestamp: row.start_timestamp,
-     note:row.note,
-     slot_id:row.slot_id
-    })
-   const getSlotsOfAvailability = data => {
-   const resutDataObject = {
-     id:req.params.user_id,
-     status:true,
-     user_availability:data.rows.map(selectSlotsTimeNote)
-    }
-     return resutDataObject
-   }
-
-   table = await pool.query(sql, params)
-    .then((data) => res.status(200).send(getSlotsOfAvailability(data)))
-    .catch((err) => {
-
-      res.status(500).send({status:false})
-    })
- })
-
-
-
-
-
 
 module.exports = router

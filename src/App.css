@@ -3,6 +3,10 @@
     width: 130px;
     height: auto;
   }
+  #userimage{
+    width: 500px;
+    height: auto;
+  }
   .cardsAvailable{
     font-size: 1em;
     max-width: 150px;
@@ -16,6 +20,13 @@
     margin: 10px;
     padding: 10px
   }
+  .slotsback{
+    background-color:green;
+    font-size: 1em;
+    max-width: 150px;
+    margin: 10px;
+    padding: 10px
+  }
   .mentorsSection{
     margin-top: 60px
   }
@@ -24,11 +35,18 @@
     background-color:rgba(238, 238, 238, 0.92);
     padding: 5px
   }
+
+  .slotsviews{
+    height:80px ;
+    background-color:red;
+    padding: 3px
+  }
   .card-title{
     font-size: 1em;
     font-weight: bold;
     text-align: center;
   }
+
   #userId{
     font-size: 2em
   }

@@ -35,34 +35,6 @@ router.get('/verifAgain', function (req, res, next) {
 });
 
 
-//get slots data
-router.post('/slots', function (req, res, next) {
-  pool.connect((error, db, done2) => {
-    if (error) {
-      return console.log(error);
-    }
-
-
-    else {
-      console.info('doing stuff')
-      db.query(`UPDATE slots
-        SET start_timestamp=$1, note=$2
-        WHERE user_id=71;`,
-        [req.body.start_timestamp[0].start_timestamp, req.body.note], (error, insertProfile) => {
-          if (error) {
-            return console.log(error);
-          } else {
-            console.log("am the")
-          }
-          //done(null,insertProfile.rows[0]);
-        })
-    }
-  })
-  res.redirect('http://localhost:3000/');
-});
-
-
-
 
 //auth verif to capture what the user verification code
 router.post('/verif', function (req, res) {
