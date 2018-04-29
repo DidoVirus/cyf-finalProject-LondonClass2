@@ -8,15 +8,14 @@ import { NavLink} from 'react-router-dom';
 import Image from "../components/Image";
 
 function Dashboard(props){
-  console.log("kiya",props.user);
 return (
-<div className="container-fluid border border-dark rounded p-2">
+<div className="container-fluid ">
     <div>
-        <Header title={"CONVIENT"}/>
+        <Header title={"CONVENIENT"}/>
     </div>
     <div className="pl-5">
         <div className="pl-4">
-            <h2 className="p-4">DASHBOARD</h2>
+            <h6 className="p-4">DASHBOARD</h6>
             <Image />
             <p className="p-4">You have no upcoming meeting conformed.</p>
             <a className="text-primary pl-4">Please Book here</a>

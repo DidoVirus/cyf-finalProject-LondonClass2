@@ -14,7 +14,9 @@ var cors = require('cors')
 var slots = require('../routes/slots');
 var match_making = require('../routes/match_making');
 var session = require('express-session');
-var slotsControler = require('../routes/slotsControler')
+var slotsController = require('../routes/slotsController')
+var getslots = require('../routes/getslots')
+const nodemailer = require('nodemailer')
 
 //using app as express
 var app = express();
@@ -51,6 +53,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+
 //calling the home router
 app.get('/', (req, res) => {
     res.render('home',{ user: req.user });
@@ -59,7 +62,8 @@ app.get('/', (req, res) => {
 app.post('/', function(req, res, next) {
  // Handle the post for this route
 });
-app.use('/api', slots);
+app.get('/api/slots', getslots.slots);
+app.post('/api/slots' , getslots.postSlots )
 app.use('/api', match_making);
 
 //using the auth for routes
@@ -67,11 +71,17 @@ app.use('/auth', authRoutes);
 //app.use('/dashBoard', dashBoardRoutes);
 //app.use('/slots', slots);
 
-app.get('/api/getslots' , slotsControler.getAllSlots)
-app.get('/slots/:id' , slotsControler.getSlotsById)
+app.get('/api/getslots' , slotsController.getAllSlots)
+app.get('/slots/:id' , slotsController.getSlotsById)
 
-app.get('/:user' , slotsControler.getSlotsBySlug)
-app.post('/api/delslots' , slotsControler.deleteSlots)
+app.get('/:user' , slotsController.getSlotsBySlug)
+app.post('/api/delslots' , slotsController.deleteSlots)
+app.get('/api/mach',slotsController.getMatchSlots)
+app.post('/api/sendmail' , slotsController.sendEmail)
+app.get('/api/logout' , slotsController.logOut)
+
+
+
 
 //setting up port
 app.listen(process.env.PORT || 2500, function () {

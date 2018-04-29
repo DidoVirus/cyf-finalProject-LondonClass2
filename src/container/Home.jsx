@@ -12,7 +12,7 @@ class Home extends Component {
 
 render () {
 return (
-<div className="container-fluid border border-dark rounded p-2">
+<div className="container-fluid">
     <div>
         <Header title={"CONVENIENT"}/>
     </div>
@@ -21,7 +21,7 @@ return (
     </div>
     <div className="p-4">
         <div className="row">
-            <Login  message={"LOGIN"} button={"Login with github"}  />
+            <Login  message={"LOGIN"} button={"Sign in with GitHub"}  />
             <Login message={"NEED ANY HELP?"} button={"Contact Organiser"} onClick={this.signup} />
         </div>
     </div>

@@ -16,6 +16,7 @@
     "keys": "^0.1.2",
     "lodash": "^4.17.5",
     "moment": "^2.19.2",
+    "nodemailer": "^4.6.3",
     "passport": "^0.4.0",
     "passport-github2": "^0.1.11",
     "passport-jwt": "^3.0.1",

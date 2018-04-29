@@ -4,10 +4,10 @@ import { NavLink} from 'react-router-dom';
 
 function Login(props){
     return(
-        <div className="col col-md-6 text-center">
-            <h3 className="text-center">{props.message}</h3>
+        <div className="col text-center">
+            <h6 className="h-3 text-center">{props.message}</h6>
+            <a className="btn btn-primary  mx-auto" href="http://localhost:2500/auth/github">{props.button}</a>
             <hr />
-            <a className="btn btn-primary btn-lg mx-auto" href="http://localhost:2500/auth/github">{props.button}</a>
 
         </div>
     )}

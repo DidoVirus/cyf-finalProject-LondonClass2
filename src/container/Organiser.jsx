@@ -9,7 +9,7 @@ function Organiser(){
 return (
 <div className="container-fluid border border-dark rounded p-2">
     <div>
-        <Header title={"CONVIENT"}/>
+        <Header title={"CONVENIENT"}/>
     </div>
     <div className="pl-4">
         <div className="pl-4">

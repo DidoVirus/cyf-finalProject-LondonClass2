@@ -9,14 +9,11 @@ var pool = dbs.getPool();
 
 //serialising user after done method to create a cookie
 passport.serializeUser((currentUser, done) => {
-  console.log("attempting serialisation");
-  console.log(currentUser);
   done(null, currentUser.user_id);
 });
 
 //deseriaing a user and testing the id object of the user
 passport.deserializeUser((id, done) => {
-  console.log("attempting deserialisation");
   pool.connect((error, db, closeConn) => {
     if (error) {
       return console.log(error);
@@ -50,11 +47,8 @@ passport.use(new GitHubStrategy({
     //checking if the user already exits or not
     else {
       db.query('SELECT * FROM users WHERE github_id = $1', [profile.id], (error, user) => {
-        console.log("Selecting user from DB", profile);
         done2();
         const currentUser = user.rows[0];
-        console.log(user);
-        console.log(currentUser);
         if (error) {
           return console.log(error);
         }
@@ -73,7 +67,7 @@ passport.use(new GitHubStrategy({
                   return console.log(error);
                 }
                 else {
-                  console.log("am the" + profile)
+                  console.log("am the")
                 }
                 done(null, insertProfile.rows[0]);
               })

@@ -4,9 +4,9 @@
     height: auto;
   }
   #userimage{
-      width: 500px;
-      height: auto;
-    }
+    width: 500px;
+    height: auto;
+  }
   .cardsAvailable{
     font-size: 1em;
     max-width: 150px;
@@ -33,7 +33,7 @@
   .timestamps{
     height:80px ;
     background-color:rgba(238, 238, 238, 0.92);
-    padding: 3px
+    padding: 5px
   }
 
   .slotsviews{
@@ -45,4 +45,25 @@
     font-size: 1em;
     font-weight: bold;
     text-align: center;
+  }
+
+  #userId{
+    font-size: 2em
+  }
+  #matchSection{
+    margin-top: 60px
+  }
+  .matchStudent{
+    font-weight: 800;
+    color: rgba(221, 86, 86, 0.867)
+  }
+  .conv{
+    margin-top: 50px
+  }
+  .btn_cal{
+    font-size: 0.7em
+  }
+  .timeSlot{
+    background-color:#ddd;
+    padding:10px
   }
