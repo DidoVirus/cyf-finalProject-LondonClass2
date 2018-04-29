@@ -182,7 +182,7 @@ exports.sendEmail = router.post('/api/sendmail', (req, res) => {
         service: 'gmail',
         auth: {
             user: 'amir.gevari@gmail.com',
-            pass: '********'
+            pass: 'Behnaz_88490'
         }
     });
 

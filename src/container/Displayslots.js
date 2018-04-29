@@ -43,7 +43,7 @@ render(){
   return(
     <div className="container-fluid border border-dark rounded p-2">
         <div>
-            <Header title={"CONVIENT" }/>
+            <Header title={"CONVENIENT" }/>
         </div>
         <div className="pl-5">
             <div className="xpl-4">
