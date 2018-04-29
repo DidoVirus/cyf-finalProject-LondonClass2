@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Col , Row} from 'reactstrap'
 import "./Home.css";
 // import Button from "../components/Button.js";
 import Header from "../components/Header.js";

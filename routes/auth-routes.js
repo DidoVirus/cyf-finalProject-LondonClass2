@@ -11,12 +11,8 @@ router.get('/login', (req, res) => {
 });
 router.get('/logout' , (req,res) =>{
   req.logout();
-<<<<<<< HEAD
   res.redirect('/');
 });
-=======
-  })
->>>>>>> raymond
 
 router.get('/meeting', (req, res) => {
   res.redirect('http://localhost:3000/meeting');
