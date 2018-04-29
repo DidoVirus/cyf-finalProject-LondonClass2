@@ -2,8 +2,8 @@ import React from "react";
 
 function Header(props){
     return(
-        <div>
-            <h1 className="display-1 text-center text-primary">{props.title}</h1>
+        <div className='col' >
+            <h5 className=" conv text-center text-primary">{props.title}</h5>
         </div>
     )}
 
