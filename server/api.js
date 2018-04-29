@@ -12,6 +12,7 @@ var keys = require('../config/keys');
 var ejs = require('ejs');
 var cors = require('cors')
 var slots = require('../routes/slots');
+var getslots = require('../routes/getslots');
 var match_making = require('../routes/match_making');
 var session = require('express-session');
 var slotsControler = require('../routes/slotsControler')

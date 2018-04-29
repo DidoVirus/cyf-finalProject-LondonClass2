@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import "./Home.css";
 import Calender from "../components/Calender.js";
 import Header from "../components/Header.js";
-// import InputLg from "../components/InputLg.js";
 import Footer from "../components/Footer.js";
 import Button from "../components/Button.js";
 import { Form, FormControl } from 'react-bootstrap';

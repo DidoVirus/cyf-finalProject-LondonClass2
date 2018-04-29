@@ -70,7 +70,7 @@ router.post('/verif', function (req, res) {
               return console.log('am the ', error);
             }
             else {
-              res.redirect('http://localhost:3000/dashboard');
+              res.redirect('http://localhost:3000/Displayslots');
             };
 
           };
@@ -102,7 +102,7 @@ router.get('/github/redirect', passport.authenticate('github', { failureRedirect
 
           }
           else {
-            res.redirect('http://localhost:3000/Dashboard');
+            res.redirect('http://localhost:3000/Displayslots');
           };
 
         });

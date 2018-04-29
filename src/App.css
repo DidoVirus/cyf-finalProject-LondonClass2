@@ -3,10 +3,11 @@
     width: 130px;
     height: auto;
   }
-  #userimage{
-      width: 500px;
-      height: auto;
-    }
+.center {
+    display: block;
+    align="left"
+    width: 50%;
+}
   .cardsAvailable{
     font-size: 1em;
     max-width: 150px;
@@ -45,4 +46,13 @@
     font-size: 1em;
     font-weight: bold;
     text-align: center;
+  }
+  .usertitle{
+    font-size: 1em;
+    color: red
+  }
+  .timeSlot{
+    margin:5px;
+    width: 270px
+
   }

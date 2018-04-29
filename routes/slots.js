@@ -40,6 +40,24 @@ router.get('/user', function getUser(req, res, next) {
   res.send(req.session.user);
 });
 
+router.get('/slots',function(req, res) {
+  console.log("am req.session 2",req.session.passport.user);
+  pool.connect((error,db,done)=>{
+    if(error){
+      return console.log(error);
+    }else{
+      db.query('SELECT * FROM slots INNER JOIN users ON (slots.user_id = users.user_id) AND users.user_id =$1',[req.session.passport.user],(error,user)=>{
+        done();
+        if(error){
+          return console.log(error);
+        }else{
+        res.json(user);
+      }
+    })
+    }
+  })
+})
+
 // post the userslots to the slots table
 router.post('/slots', async function(req, res) {
 

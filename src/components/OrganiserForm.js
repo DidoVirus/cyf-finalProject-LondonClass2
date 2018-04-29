@@ -13,7 +13,7 @@ function OrganiserForm(props){
         <div className="form-group row">
           <label for="inputPassword3" className="col-sm-2 col-form-label">EMAIL</label>
           <div className="col-sm-10">
-            <input type="password" className="form-control" id="inputPassword3" placeholder="email" />
+            <input type="email" className="form-control" id="inputPassword3" placeholder="email" />
           </div>
         </div>
         <fieldset className="form-group">
@@ -43,13 +43,12 @@ function OrganiserForm(props){
         </fieldset>
         <div className="form-group row">
           <div className="col-sm-10">
-            <button type="submit" className="btn btn-primary submit">Sumbit</button>
-          </div>
+            <button type="submit" className="btn btn-primary submit" >Sumbit</button>
+          </div> 
         </div>
       </form>
-        
-    )}
-    
-   
-export default OrganiserForm;
 
+    )}
+
+
+export default OrganiserForm;

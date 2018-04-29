@@ -11,14 +11,15 @@ exports.getAllSlots = router.get('/api/getslots', (req, res) => {
         if (error) {
             return console.log(error);
         }
-        const querys = await db.query(`SELECT * FROM slots 
+        const querys = await db.query(`SELECT * FROM slots
                                         INNER JOIN users ON
                                         (slots.user_id = users.user_id)`,
             (err, table) => {
                 if (err) {
                     console.log(err)
                 } else {
-                    res.json(table.rows)
+                  var user = req.user;
+                    res.json([table.rows,user])
                     done()
                 }
 
@@ -34,9 +35,9 @@ exports.getSlotsById = router.get('/slots/:id', (req, res) => {
         if (error) {
             return console.log(error)
         }
-        const query = await db.query(`SELECT * FROM slots 
+        const query = await db.query(`SELECT * FROM slots
                                         INNER JOIN users ON
-                                        (slots.user_id = users.user_id) 
+                                        (slots.user_id = users.user_id)
                                         AND (users.user_id=${userID})`,
             (err, data) => {
                 if (err) {
@@ -58,9 +59,9 @@ exports.getSlotsBySlug = router.get('/:user', (req, res) => {
             if (error) {
                 return console.log(error)
             }
-            const query = await db.query(`SELECT * FROM slots 
+            const query = await db.query(`SELECT * FROM slots
             INNER JOIN users ON
-            (slots.user_id = users.user_id) 
+            (slots.user_id = users.user_id)
             AND (users.role_student=true)`
                 , (err, data) => {
                     if (err) {
@@ -77,9 +78,9 @@ exports.getSlotsBySlug = router.get('/:user', (req, res) => {
             if (error) {
                 return console.log(error)
             }
-            const query = await db.query(`SELECT * FROM slots 
+            const query = await db.query(`SELECT * FROM slots
             INNER JOIN users ON
-            (slots.user_id = users.user_id) 
+            (slots.user_id = users.user_id)
             AND (users.role_mentor=true)`
                 , (err, data) => {
                     if (err) {
@@ -116,4 +117,3 @@ exports.deleteSlots= router.post('/api/delslots' , (req, res)=>{
 
 
 })
-
