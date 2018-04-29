@@ -63,7 +63,7 @@ app.post('/', function(req, res, next) {
  // Handle the post for this route
 });
 app.get('/api/slots', getslots.slots);
-app.post('/api/slots' , getslots.postSlots )
+app.use('/api', slots);
 app.use('/api', match_making);
 
 //using the auth for routes

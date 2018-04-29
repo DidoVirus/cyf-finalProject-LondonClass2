@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Col , Row} from 'reactstrap'
 import "./Home.css";
-import Button from "../components/Button.js";
+// import Button from "../components/Button.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import { NavLink} from 'react-router-dom';
 import Image from "../components/Image.js";
-import moment from 'moment'
+import { Container, Card, CardTitle, CardText, Row, Col, Button } from 'reactstrap';
+import moment from 'moment';
 
 export class Displayslots extends React.Component {
   constructor (props){
@@ -20,6 +20,14 @@ export class Displayslots extends React.Component {
   componentDidMount(){
     this.getSlots()
 }
+
+handleLogOut = async () => {
+           const logingout = await fetch('http://localhost:2500/auth/logout', {
+               method: 'GET',
+               credentials: 'include',
+               mode: 'cors',
+           })
+   }
 
 getSlots = async () =>{
   const fetchSlots=  await fetch('http://localhost:2500/api/slots',{
@@ -38,27 +46,25 @@ getSlots = async () =>{
   })
 }
 
+
+
 render(){
-  console.log(this.state.slots)
   return(
     <div className="container-fluid border border-dark rounded p-2">
         <div>
-            <Header title={"CONVENIENT" }/>
+            <NavLink to="/"><Button onClick={this.handleLogOut}>LOG OUT</Button></NavLink>
+            <Header title={"CONVIENT"}/>
         </div>
         <div className="pl-5">
-            <div className="xpl-4">
+            <div className="pl-4">
                 <h2 className="p-4">BOOKED AVAILABILITY</h2>
                 <Image />
 
                 <p className="p-4">HERE YOUR UPCOMING AVAILABILITY</p>
-                <Row >
-                {this.state.slots.map(time =>
-                <Col>
-                  <p className='timeSlot'> {moment(time.start_timestamp).format("dddd, Do MMMM  , hha")}</p>
-                  </Col>
-                  )}
-                  
-                  </Row>
+                  {this.state.slots.map(time =>
+                    <img      src={time.github_avatar_url }/>
+                    )}
+
             </div>
             <Col>
              <a className="col btn btn-primary mx-auto" href="http://localhost:2500/auth/meeting">BOOK MEETING</a>
