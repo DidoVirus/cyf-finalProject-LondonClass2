@@ -15,15 +15,10 @@ return (
     <div className="pl-5">
         <div className="pl-4">
             <h2 className="p-4">DASHBOARD</h2>
-            <p className="p-4">You have no upcoming meeting conformed.</p>
-            <a className="text-primary pl-4">Please Book here</a>
-
+            <p className="p-4">At present, you have no upcoming meetings scheduled</p>
         </div>
         <div className="col-md-5 submit pb-5">
-         <NavLink to={"/Meeting/" + props.user}><Button button={"Book a meeting"}  /></NavLink>
-        </div>
-        <div className="col-md-5  submit pb-5">
-        <NavLink to="/Meeting"><Button  button={"Mark availability"}/></NavLink>
+         <NavLink to={"/Meeting"}><Button button={"Book a meeting"}  /></NavLink>
         </div>
         <div>
             <Footer />

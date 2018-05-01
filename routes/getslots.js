@@ -19,6 +19,7 @@ exports.slots= router.get('/api/slots',function(req, res) {;
           return console.log(error);
         }else{
         res.json(user);
+
       }
     })
     }

@@ -21,8 +21,8 @@ return (
     </div>
     <div className="p-4">
         <div className="row">
-            <Login  message={"LOGIN"} button={"Sign in with GitHub"}  />
-            <Login message={"NEED ANY HELP?"} button={"Contact Organiser"} onClick={this.signup} />
+            <Login  message={"LOGIN"} button={"Sign in with GitHub"} link={"http://localhost:2500/auth/github"} />
+            <Login message={"NEED ANY HELP?"} button={"Contact Organiser"} link={"http://localhost:3000/Organiser"}/>
         </div>
     </div>
     <div>

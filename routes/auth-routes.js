@@ -28,12 +28,6 @@ router.get('/verif', function (req, res, next) {
   res.render('verif', { user: req.user })
 });
 
-router.get('/verifAgain', function (req, res, next) {
-  res.render('verifAgain', { user: req.user })
-});
-
-
-
 //auth verif to capture what the user verification code
 router.post('/verif', function (req, res) {
   var verifCode = req.body.id;// storing the user verification code in variable
@@ -52,7 +46,7 @@ router.post('/verif', function (req, res) {
         //updating the user table with user verification code
         else {
           if (!user.rowCount) {
-            res.redirect('/auth/verifAgain');
+            res.redirect('http://localhost:3000/Activation');
           }
           else {
             //console.log(user.rows[0])
@@ -71,7 +65,7 @@ router.post('/verif', function (req, res) {
               return console.log('am the ', error);
             }
             else {
-              res.redirect('http://localhost:3000/dashboard');
+              res.redirect('http://localhost:3000/Displayslots');
             };
 
           };
@@ -103,7 +97,7 @@ router.get('/github/redirect', passport.authenticate('github', { failureRedirect
 
           }
           else {
-            res.redirect('http://localhost:3000/Dashboard');
+            res.redirect('http://localhost:3000/Displayslots');
           };
 
         });
