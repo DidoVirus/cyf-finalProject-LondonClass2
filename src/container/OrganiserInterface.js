@@ -19,7 +19,7 @@ export default class OrganiserInterface extends Component {
 
 
     componentDidMount() {
-        this.getAllSlots()  
+        this.getAllSlots()
     }
 
     getAllSlots = async () => {

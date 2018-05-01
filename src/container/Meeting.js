@@ -58,7 +58,7 @@ render () {
     <div className="pl-4">
         <div className="pl-4 col-md-5">
             <h2 className="p-4">Meeting Request</h2>
-            <p className="pl-4">What Would Like To Discuss?</p>
+            <p className="pl-4">Discussion Points</p>
             <div className="pl-4">
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={this.state.value} onChange={this.handleChange}/>
             </div>
@@ -69,7 +69,7 @@ render () {
                     <Calender getData={ this.getData }/>
                 </div>
                 <div className="submit pb-5">
-                    <NavLink to="/Displayslots"><Button  onClick={ this.getSlots} button={"SUBMIT"} /></NavLink>
+                    <NavLink to="/Displayslots"><Button  onClick={ this.getSlots} button={"UPDATE"} /></NavLink>
                 </div>
             </div>
         </div>
