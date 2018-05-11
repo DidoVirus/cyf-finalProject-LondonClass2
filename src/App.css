@@ -1,4 +1,3 @@
-
 #cardImageStudent{
     width: 130px;
     height: auto;
@@ -64,6 +63,20 @@
     font-size: 0.7em
   }
   .timeSlot{
-    background-color:#ddd;
-    padding:10px
+    width:280px;
+    margin:8px;
+  }
+  .card-text{
+    height: 110px
+  }
+  #pageTitle{
+    margin-left:20%;
+    font-size: 1.1em
+  }
+  #header_title{
+    color:#007bff;
+    font-size: 2em
+  }
+  #meeting_content{
+    margin-top: 40px
   }
