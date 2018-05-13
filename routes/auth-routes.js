@@ -49,8 +49,6 @@ router.post('/verif', function (req, res) {
             res.redirect('http://localhost:3000/Activation');
           }
           else {
-            //console.log(user.rows[0])
-            //console.log('yesyes',req.user.user_id);
             var user_id = req.user.user_id;
             var studentValue = user.rows[0].role_student;
             var mentorValue = user.rows[0].role_mentor;

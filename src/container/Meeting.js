@@ -1,7 +1,6 @@
 
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import "./Home.css";
 import Calender from "../components/Calender.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
@@ -31,22 +30,36 @@ class Meeting extends Component {
     })
     }
     getSlots = () => {
-      fetch('http://localhost:2500/api/slots', {
-        method: 'POST',
-        credentials: 'include',
-        mode:'cors',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        "user_availability":this.state.collectedData,
-        "note":this.state.value
-      })
-    })
-    .then(response=>response.json())
-    .then(resp=>console.log(resp))
-    .catch(err => console.log(err))
+      if(this.state.value === ""){
+        alert('PLEASE FILL IN THE TEXT AND ALSO SELECT THE SLOTS TO CONTINUE!')
+      }else if (this.state.collectedData === undefined){
+        alert('PLEASE FILL IN THE TEXT AND ALSO SELECT THE SLOTS TO CONTINUE!')
+      }else{
+        console.log('hi')
+          fetch('http://localhost:2500/api/slots', {
+            method: 'POST',
+            credentials: 'include',
+            mode:'cors',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            "user_availability":this.state.collectedData,
+            "note":this.state.value
+          })
+        })
+        .then(
+          response=>{response.json()
+
+              console.log('hi',response )
+          }
+      )
+        .then(resp=>console.log(resp))
+        .catch(err => console.log(err))
+      }
+
+
   }
 render () {
   console.log(this.state.collectData)
@@ -58,7 +71,9 @@ render () {
     <div className="pl-4">
         <div className="pl-4 col-md-5">
             <h2 className="p-4">Meeting Request</h2>
-            <p className="pl-4">Discussion Points</p>
+
+
+            <p className="pl-4">What Would Like To Discuss?</p>
             <div className="pl-4">
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={this.state.value} onChange={this.handleChange}/>
             </div>
@@ -69,7 +84,9 @@ render () {
                     <Calender getData={ this.getData }/>
                 </div>
                 <div className="submit pb-5">
-                    <NavLink to="/Displayslots"><Button  onClick={ this.getSlots} button={"UPDATE"} /></NavLink>
+                    {/* <NavLink to="/Displayslots"> */}
+                    <Button  onClick={ this.getSlots} button={"SUBMIT"} />
+                  {/* </NavLink> */}
                 </div>
             </div>
         </div>

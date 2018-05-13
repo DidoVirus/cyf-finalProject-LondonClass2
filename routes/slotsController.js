@@ -12,7 +12,7 @@ exports.getAllSlots = router.get('/api/getslots', (req, res) => {
         if (error) {
             return console.log(error);
         }
-        const querys = await db.query(`SELECT * FROM slots 
+        const querys = await db.query(`SELECT * FROM slots
                                         INNER JOIN users ON
                                         (slots.user_id = users.user_id)`,
             (err, table) => {
@@ -37,9 +37,9 @@ exports.getSlotsById = router.get('/slots/:id', (req, res) => {
         if (error) {
             return console.log(error)
         }
-        const query = await db.query(`SELECT * FROM slots 
+        const query = await db.query(`SELECT * FROM slots
                                         INNER JOIN users ON
-                                        (slots.user_id = users.user_id) 
+                                        (slots.user_id = users.user_id)
                                         AND (users.user_id=${userID})`,
             (err, data) => {
                 if (err) {
@@ -61,9 +61,9 @@ exports.getSlotsBySlug = router.get('/:user', (req, res) => {
             if (error) {
                 return console.log(error)
             }
-            const query = await db.query(`SELECT * FROM slots 
+            const query = await db.query(`SELECT * FROM slots
             INNER JOIN users ON
-            (slots.user_id = users.user_id) 
+            (slots.user_id = users.user_id)
             AND (users.role_student=true)`
                 , (err, data) => {
                     if (err) {
@@ -80,9 +80,9 @@ exports.getSlotsBySlug = router.get('/:user', (req, res) => {
             if (error) {
                 return console.log(error)
             }
-            const query = await db.query(`SELECT * FROM slots 
+            const query = await db.query(`SELECT * FROM slots
             INNER JOIN users ON
-            (slots.user_id = users.user_id) 
+            (slots.user_id = users.user_id)
             AND (users.role_mentor=true)`
                 , (err, data) => {
                     if (err) {
@@ -126,7 +126,7 @@ exports.getMatchSlots = router.get('/api/mach', (req, res) => {
         if (error) {
             return console.log(error)
         }
-        const studentsQuery = await db.query(`SELECT * FROM slots 
+        const studentsQuery = await db.query(`SELECT * FROM slots
         INNER JOIN users ON(slots.user_id = users.user_id)
          WHERE users.role_student=true` , (err, data) => {
                 if (err) {
@@ -135,7 +135,7 @@ exports.getMatchSlots = router.get('/api/mach', (req, res) => {
                     data.rows.map(slots => studentSLots.push(slots))
                 }
             })
-        const mentorsQuery = await db.query(`SELECT * FROM slots 
+        const mentorsQuery = await db.query(`SELECT * FROM slots
          INNER JOIN users ON(slots.user_id = users.user_id)
           WHERE users.role_mentor=true` , (err, data) => {
                 if (err) {
@@ -156,7 +156,7 @@ exports.getMatchSlots = router.get('/api/mach', (req, res) => {
                 }
             }
         }
-        const matchQuery = await db.query(`SELECT * FROM slots 
+        const matchQuery = await db.query(`SELECT * FROM slots
         INNER JOIN users ON(slots.user_id = users.user_id)
          WHERE users.user_id = ${matchSlots[2]}`, (err, data) => {
                 if (err) {
@@ -218,11 +218,7 @@ exports.logOut = router.get('/api/logout' , (req,res,next) =>{
     }if(req.isUnauthenticated()){
         console.log('you have to log in')
     }
-    
-    // res.json({status : 'you sucssefuly loged out'})
-   
-    
-    
-    
-})
 
+
+
+})
