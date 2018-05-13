@@ -1,4 +1,26 @@
-
+body * {
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.title{
+  font-size: 4em;
+ color: #007bff
+}
+.subtitle{
+  font-size: 1.4em;
+  margin: 20px
+}
+.subheading{
+  margin-top:20px 
+}
+.login{
+  margin-top: 100px;
+  margin-bottom: 180px
+}
+.h-3{
+  margin-bottom: 10px
+}
 #cardImageStudent{
     width: 130px;
     height: auto;
@@ -64,6 +86,33 @@
     font-size: 0.7em
   }
   .timeSlot{
-    background-color:#ddd;
-    padding:10px
+    width:280px;
+    margin:8px;
+  }
+  .card-text{
+    height: 110px
+  }
+  #pageTitle{
+    margin-left:20%;
+    font-size: 1.1em
+  }
+  #header_title{
+    color:#007bff;
+    font-size: 2em
+  }
+  #meeting_content{
+    margin-top: 40px
+  }
+  .logo{
+    width:20%
+  }
+  @media only screen and (max-width: 360px) {
+    .logo{
+      margin-top:20px;
+      width:60%
+    }
+    .login{
+      margin-top: 100px;
+      margin-bottom: 160px
+    }
   }
