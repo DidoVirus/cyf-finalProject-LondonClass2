@@ -7,8 +7,36 @@ class Calender extends Component {
         super(props);
         this.state = {
             collectData: [],
+            slots:[]
         }
+
+        this.fetchSlots = this.fetchSlots.bind(this);
+
     }
+
+    componentDidMount(){
+      this.fetchSlots();
+  }
+
+    fetchSlots = async () =>{
+      const getSlots=  await fetch('http://localhost:2500/api/slots',{
+          method: 'GET',
+          credentials: 'include',
+          mode:'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+
+      })
+      const responseSlots = await getSlots.json()
+      this.setState({
+        slots:responseSlots.rows.map(time => moment(time.start_timestamp).format())
+
+      })
+    }
+
+
     period = (time) => {
         if (time === "9AM-12PM") {
             return "MORNING";
@@ -28,9 +56,10 @@ class Calender extends Component {
             start_timestamp = moment(day, "DD/MM/YYYY").add(18, 'hours').format()
         }
         const pullItArray = this.state.collectData.push({ "start_timestamp": start_timestamp });
-        this.props.getData(this.state.collectData);
+          this.props.getData(this.state.collectData);
     }
     render() {
+      console.log("am them",this.state.slots  )
         var day1 = moment().format("DD/MM/YYYY");
         var day2 = moment().add(1, 'days').format("DD/MM/YYYY");
         var day3 = moment().add(2, 'days').format("DD/MM/YYYY");
@@ -49,8 +78,7 @@ class Calender extends Component {
         const noDays = 7;
         const dayInTheWeek = [day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14];
         const timeInDay = ["9AM-12PM", "12PM-6PM", "6PM-8PM"];
-        // this.props.getData(this.state.collectData)
-        // console.log(this.state.collectData);
+
         return (
             <table className="table table-responsive">
                 <thead>
@@ -64,13 +92,13 @@ class Calender extends Component {
                         return <tr>
                             <td className="periodOfDay" scope="row">{this.period(time)}</td>
                             {dayInTheWeek.map((day) => {
-                                return <th><CalenderButton bookedDays={this.bookedDays} day={day} value={time} booked={false} /></th>;
+                                return <th><CalenderButton bookedDays={this.bookedDays} bookedSlots={this.state.slots}  day={day} value={time} booked={false} dataStamps = {this.state.collectData} /></th>;
                             })}
                         </tr>
                     })}
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
         );

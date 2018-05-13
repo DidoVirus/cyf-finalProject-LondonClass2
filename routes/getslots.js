@@ -19,13 +19,14 @@ exports.slots= router.get('/api/slots',function(req, res) {;
           return console.log(error);
         }else{
         res.json(user);
+
       }
     })
     }
   })
 })
 exports.postSlots=router.post('/api/slots', async function(req, res) {
-  console.log("am req.session",req.session.passport.user);
+  console.log("am",req.user);
   req.body.user_availability.forEach(user_availability => {
     let data = [
       req.session.passport.user,
@@ -41,5 +42,8 @@ exports.postSlots=router.post('/api/slots', async function(req, res) {
       res.status(500).send({status:false})
       })
     })
-    res.send({status:true})
+    res.send({status:true},
+      {}
+
+    )
   })

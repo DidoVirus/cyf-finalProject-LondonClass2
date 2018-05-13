@@ -13,6 +13,8 @@ import Organiser from './container/Organiser.jsx';
 import OrganiserInterface from './container/OrganiserInterface'
 import './index.css';
 import './App.css'
+import Calender from './components/Calender.js';
+
 
 
 const App = () => (
@@ -25,6 +27,8 @@ const App = () => (
       <Route path="/Displayslots" component={Displayslots} />
       <Route path="/organiser" component={Organiser} />
       <Route path="/admin" component={OrganiserInterface} />
+      <Route path="/Calender" component={Calender} />
+
 
     </div>
   </BrowserRouter>

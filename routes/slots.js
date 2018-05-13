@@ -46,7 +46,7 @@ router.get('/user', function getUser(req, res, next) {
 // post the userslots to the slots table
 router.post('/slots', async function(req, res) {
 
-  console.log("am req.session",req.session.passport.user);
+  console.log("am req.session",req.user);
 
   req.body.user_availability.forEach(user_availability => {
     let data = [

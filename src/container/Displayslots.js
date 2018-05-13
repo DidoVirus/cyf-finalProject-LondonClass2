@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import "./Home.css";
-// import Button from "../components/Button.js";
+import {Col , Row} from 'reactstrap'
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import { NavLink} from 'react-router-dom';
 import Image from "../components/Image.js";
-import { Container, Card, CardTitle, CardText, Row, Col, Button } from 'reactstrap';
-import moment from 'moment';
+import moment from 'moment'
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap';
+const now = moment().format()
+
+
 
 export class Displayslots extends React.Component {
   constructor (props){
@@ -20,14 +22,6 @@ export class Displayslots extends React.Component {
   componentDidMount(){
     this.getSlots()
 }
-
-handleLogOut = async () => {
-           const logingout = await fetch('http://localhost:2500/auth/logout', {
-               method: 'GET',
-               credentials: 'include',
-               mode: 'cors',
-           })
-   }
 
 getSlots = async () =>{
   const fetchSlots=  await fetch('http://localhost:2500/api/slots',{
@@ -46,30 +40,61 @@ getSlots = async () =>{
   })
 }
 
+deleteSlots= async(e) =>{
+  var conf = window.confirm('are you sure you want to delete this slot')
+  if (conf == true) {
+      let slotId = e.target.value
+      const fetchDelet = await fetch('http://localhost:2500/api/delslots', {
+          method: 'POST',
+          credentials: 'include',
+          mode: 'cors',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }, body: JSON.stringify({
+              "slot": slotId
+          })
 
-
+      })
+      const response = fetchDelet.json()
+      this.getSlots()
+  }
+}
 render(){
   return(
-    <div className="container-fluid border border-dark rounded p-2">
+    <div className="pl-5">
         <div>
-            <NavLink to="/"><Button onClick={this.handleLogOut}>LOG OUT</Button></NavLink>
-            <Header title={"CONVIENT"}/>
+            <Header title={"CONVIENT" }/>
         </div>
         <div className="pl-5">
-            <div className="pl-4">
+            <div className="xpl-4">
                 <h2 className="p-4">BOOKED AVAILABILITY</h2>
-                <Image />
+                <div className="center">
+                    <Image />
+
+                </div>
 
                 <p className="p-4">HERE YOUR UPCOMING AVAILABILITY</p>
-                  {this.state.slots.map(time =>
-                    <img      src={time.github_avatar_url }/>
-                    )}
+              <div className="p-4">
+                <Row >
+                {this.state.slots.map(time => moment(time.start_timestamp).format() > now ?
+                <Col>
+                  <Button className='timeSlot' color="primary" size="lg" onClick={this.deleteSlots} value={time.slot_id}> {moment(time.start_timestamp).format("dddd, Do MMMM  , hh a")} </Button>
+                  </Col>
 
+                  : null)}
+
+                  </Row>
+              </div>
             </div>
+            <br></br>
+
+            <div className="pl-5">
             <Col>
              <a className="col btn btn-primary mx-auto" href="http://localhost:2500/auth/meeting">BOOK MEETING</a>
-             {/* <Button  onClick={ this.getSlots} button={"SUBMIT"} /> */}
            </Col>
+           </div>
+
             <div>
                 <Footer />
             </div>

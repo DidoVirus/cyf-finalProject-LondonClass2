@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import "./Home.css";
 import OrganiserForm from "../components/OrganiserForm.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";

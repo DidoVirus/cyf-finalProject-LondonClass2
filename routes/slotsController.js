@@ -12,7 +12,7 @@ exports.getAllSlots = router.get('/api/getslots', (req, res) => {
         if (error) {
             return console.log(error);
         }
-        const querys = await db.query(`SELECT * FROM slots 
+        const querys = await db.query(`SELECT * FROM slots
                                         INNER JOIN users ON
                                         (slots.user_id = users.user_id)`,
             (err, table) => {
@@ -37,8 +37,9 @@ exports.getSlotsById = (req, res) => {
         if (error) {
             return console.log(error)
         }
-        const query = await db.query(`SELECT * FROM slots 
+        const query = await db.query(`SELECT * FROM slots
                                         INNER JOIN users ON
+
                                         (slots.user_id = users.user_id) 
                                         WHERE slot_id=ANY(ARRAY[${slotId}])`,
             (err, data) => {
@@ -56,6 +57,7 @@ exports.getSlotsById = (req, res) => {
 exports.getSlotsBySlug = (req, res) => {
 
     const users = req.params.user
+
     console.log(users)
     pool.connect(async (error, db, done) => {
         if (error) {
@@ -69,7 +71,6 @@ exports.getSlotsBySlug = (req, res) => {
         }catch(error){
             console.log(error)
         }
-        
 
     })
 
@@ -94,7 +95,6 @@ exports.deleteSlots = router.post('/api/delslots', (req, res) => {
 
 
 })
-
 exports.getMatchSlots = (req, res) => {
 
     pool.connect(async (err, db, done) => {
@@ -190,4 +190,4 @@ exports.postSlots = async function(req, res) {
       })
       res.send({status:true})
     }
-  
+
