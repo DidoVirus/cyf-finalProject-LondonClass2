@@ -12,7 +12,7 @@ exports.getAllSlots = router.get('/api/getslots', (req, res) => {
         if (error) {
             return console.log(error);
         }
-        const querys = await db.query(`SELECT * FROM slots 
+        const querys = await db.query(`SELECT * FROM slots
                                         INNER JOIN users ON
                                         (slots.user_id = users.user_id)`,
             (err, table) => {
@@ -31,16 +31,17 @@ exports.getAllSlots = router.get('/api/getslots', (req, res) => {
 
 })
 
-exports.getSlotsById = router.get('/slots/:id', (req, res) => {
-    const userID = req.params.id
+exports.getSlotsById = (req, res) => {
+    const slotId = req.params.id
     pool.connect(async (error, db, done) => {
         if (error) {
             return console.log(error)
         }
-        const query = await db.query(`SELECT * FROM slots 
+        const query = await db.query(`SELECT * FROM slots
                                         INNER JOIN users ON
+
                                         (slots.user_id = users.user_id) 
-                                        AND (users.user_id=${userID})`,
+                                        WHERE slot_id=ANY(ARRAY[${slotId}])`,
             (err, data) => {
                 if (err) {
                     console.log(err)
@@ -50,55 +51,31 @@ exports.getSlotsById = router.get('/slots/:id', (req, res) => {
                 }
             })
     })
-})
+}
 
 
-exports.getSlotsBySlug = router.get('/:user', (req, res) => {
+exports.getSlotsBySlug = (req, res) => {
 
     const users = req.params.user
-    if (users == 'students') {
-        pool.connect(async (error, db, done) => {
-            if (error) {
-                return console.log(error)
-            }
-            const query = await db.query(`SELECT * FROM slots 
-            INNER JOIN users ON
-            (slots.user_id = users.user_id) 
-            AND (users.role_student=true)`
-                , (err, data) => {
-                    if (err) {
-                        console.log('you have an error' + err)
-                    } else {
-                        res.json(data.rows)
-                    }
 
-                }
-            )
-        })
-    } else if (users == 'mentors') {
-        pool.connect(async (error, db, done) => {
-            if (error) {
-                return console.log(error)
-            }
-            const query = await db.query(`SELECT * FROM slots 
-            INNER JOIN users ON
-            (slots.user_id = users.user_id) 
-            AND (users.role_mentor=true)`
-                , (err, data) => {
-                    if (err) {
-                        console.log('you have an error' + err)
-                    } else {
-                        res.json(data.rows)
-                    }
+    console.log(users)
+    pool.connect(async (error, db, done) => {
+        if (error) {
+            return console.log(error)
+        }
+        try{
+            const queryUsers = await db.query(`SELECT * from users
+            WHERE user_id=ANY(ARRAY[${users}])`)
+            res.json(queryUsers.rows)
 
-                }
-            )
-        })
-    } else {
-        res.send('you have to choose between mentors or students')
-    }
+        }catch(error){
+            console.log(error)
+        }
 
-})
+    })
+
+
+}
 
 exports.deleteSlots = router.post('/api/delslots', (req, res) => {
     slotId = req.body.slot
@@ -118,59 +95,25 @@ exports.deleteSlots = router.post('/api/delslots', (req, res) => {
 
 
 })
-exports.getMatchSlots = router.get('/api/mach', (req, res) => {
-    let studentSLots = []
-    let mentorsSlots = []
-    let matchSlots = []
-    pool.connect(async (error, db, done) => {
-        if (error) {
-            return console.log(error)
+exports.getMatchSlots = (req, res) => {
+
+    pool.connect(async (err, db, done) => {
+        if (err) {
+            console.log('you have an error: ' + err)
         }
-        const studentsQuery = await db.query(`SELECT * FROM slots 
-        INNER JOIN users ON(slots.user_id = users.user_id)
-         WHERE users.role_student=true` , (err, data) => {
-                if (err) {
-                    console.log('you have got an error' + err)
-                } else {
-                    data.rows.map(slots => studentSLots.push(slots))
-                }
-            })
-        const mentorsQuery = await db.query(`SELECT * FROM slots 
-         INNER JOIN users ON(slots.user_id = users.user_id)
-          WHERE users.role_mentor=true` , (err, data) => {
-                if (err) {
-                    console.log('you have got an error' + err)
-                } else {
-                    data.rows.map(slots => mentorsSlots.push(slots))
-                }
-            })
-        for (var i = 0; i < studentSLots.length; i++) {
-            for (var j = 0; j < mentorsSlots.length; j++) {
-                if (studentSLots[i].start_timestamp === mentorsSlots[j].start_timestamp) {
-                    matchSlots.push(
-                        studentSLots[i].user_id,
-                        mentorsSlots[j].user_id,
-                        studentSLots[i].start_timestamp)
-                } else {
-                    res.send('there is no match')
-                }
-            }
+        try {
+            const queryMatchSlots = await db.query(`SELECT * FROM convenient_availability`)
+            res.json(queryMatchSlots.rows)
+
+
+        } catch (error) {
+            console.log(error)
         }
-        const matchQuery = await db.query(`SELECT * FROM slots 
-        INNER JOIN users ON(slots.user_id = users.user_id)
-         WHERE users.user_id = ${matchSlots[2]}`, (err, data) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    res.send(data)
-                }
-            })
 
-
-
+       
     })
 
-})
+}
 
 exports.sendEmail = router.post('/api/sendmail', (req, res) => {
     console.log(req.body)
@@ -208,21 +151,43 @@ exports.sendEmail = router.post('/api/sendmail', (req, res) => {
     })
 
 })
-exports.logOut = router.get('/api/logout' , (req,res,next) =>{
-    console.log('first' , req.user)
-    if(req.isAuthenticated()){
+exports.logOut = router.get('/api/logout', (req, res, next) => {
+    console.log('first', req.user)
+    if (req.isAuthenticated()) {
         req.session.destroy;
-        req.user=null
+        req.user = null
         res.redirect('/')
-        console.log('you loged out' , req.user)
-    }if(req.isUnauthenticated()){
+        console.log('you loged out', req.user)
+    } if (req.isUnauthenticated()) {
         console.log('you have to log in')
     }
-    
+
     // res.json({status : 'you sucssefuly loged out'})
-   
-    
-    
-    
+
+
+
+
 })
+
+exports.postSlots = async function(req, res) {
+
+    console.log("am req.session",req.session.passport.user);
+  
+    req.body.user_availability.forEach(user_availability => {
+      let data = [
+        req.session.passport.user,
+        user_availability.start_timestamp,
+        req.body.note
+        ]
+        console.log("am all your",data);
+      let sql = `INSERT INTO slots (user_id, start_timestamp, note)
+                VALUES ($1,$2,$3);`
+      pool.query(sql, data)
+      .then(data => res.status(200))
+      .catch(err => {
+        res.status(500).send({status:false})
+        })
+      })
+      res.send({status:true})
+    }
 

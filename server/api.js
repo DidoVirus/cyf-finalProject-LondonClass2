@@ -63,7 +63,7 @@ app.post('/', function(req, res, next) {
  // Handle the post for this route
 });
 app.get('/api/slots', getslots.slots);
-app.use('/api', slots);
+app.post('/api/slots', slotsController.postSlots);
 app.use('/api', match_making);
 
 //using the auth for routes
@@ -72,11 +72,11 @@ app.use('/auth', authRoutes);
 //app.use('/slots', slots);
 
 app.get('/api/getslots' , slotsController.getAllSlots)
-app.get('/slots/:id' , slotsController.getSlotsById)
+app.get('/api/slots/:id' , slotsController.getSlotsById)
 
-app.get('/:user' , slotsController.getSlotsBySlug)
+app.get('/api/users/:user' , slotsController.getSlotsBySlug)
 app.post('/api/delslots' , slotsController.deleteSlots)
-app.get('/api/mach',slotsController.getMatchSlots)
+app.get('/api/match',slotsController.getMatchSlots)
 app.post('/api/sendmail' , slotsController.sendEmail)
 app.get('/api/logout' , slotsController.logOut)
 

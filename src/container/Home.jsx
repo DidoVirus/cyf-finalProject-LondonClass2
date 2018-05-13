@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import "./Home.css";
 import Header from "../components/Header.js";
 import Login from "../components/Login.js";
 import Image from "../components/Image.js";

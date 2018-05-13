@@ -1,3 +1,4 @@
+
 const router = require('express').Router();
 const passport = require('passport');
 var bodyParser = require('body-parser');
@@ -11,12 +12,8 @@ router.get('/login', (req, res) => {
 });
 router.get('/logout' , (req,res) =>{
   req.logout();
-<<<<<<< HEAD
   res.redirect('/');
 });
-=======
-  })
->>>>>>> raymond
 
 router.get('/meeting', (req, res) => {
   res.redirect('http://localhost:3000/meeting');
@@ -31,12 +28,6 @@ router.get('/github', passport.authenticate('github', {
 router.get('/verif', function (req, res, next) {
   res.render('verif', { user: req.user })
 });
-
-router.get('/verifAgain', function (req, res, next) {
-  res.render('verifAgain', { user: req.user })
-});
-
-
 
 //auth verif to capture what the user verification code
 router.post('/verif', function (req, res) {
@@ -56,11 +47,9 @@ router.post('/verif', function (req, res) {
         //updating the user table with user verification code
         else {
           if (!user.rowCount) {
-            res.redirect('/auth/verifAgain');
+            res.redirect('http://localhost:3000/Activation');
           }
           else {
-            //console.log(user.rows[0])
-            //console.log('yesyes',req.user.user_id);
             var user_id = req.user.user_id;
             var studentValue = user.rows[0].role_student;
             var mentorValue = user.rows[0].role_mentor;
@@ -75,7 +64,7 @@ router.post('/verif', function (req, res) {
               return console.log('am the ', error);
             }
             else {
-              res.redirect('http://localhost:3000/DisplaySlots');
+              res.redirect('http://localhost:3000/Displayslots');
             };
 
           };
@@ -107,7 +96,7 @@ router.get('/github/redirect', passport.authenticate('github', { failureRedirect
 
           }
           else {
-            res.redirect('http://localhost:3000/DisplaySlots');
+            res.redirect('http://localhost:3000/Displayslots');
           };
 
         });

@@ -58,7 +58,7 @@ class Calender extends Component {
             start_timestamp = moment(day, "DD/MM/YYYY").add(18, 'hours').format()
         }
         const pullItArray = this.state.collectData.push({ "start_timestamp": start_timestamp });
-        this.props.getData(this.state.collectData);
+          this.props.getData(this.state.collectData);
     }
     render() {
       console.log("am them",this.state.collectData)
