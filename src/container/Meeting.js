@@ -1,12 +1,14 @@
-
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Calender from "../components/Calender.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import Button from "../components/Button.js";
+import NavBar from '../components/NavBar'
 import { Form, FormControl } from 'react-bootstrap';
 import { NavLink} from 'react-router-dom';
+import moment from 'moment'
+moment.locale('en-GB')
 
 
 class Meeting extends Component {
@@ -60,15 +62,15 @@ class Meeting extends Component {
       }
 
 
+
   }
 render () {
   console.log(this.state.collectData)
     return (
-<div className="container-fluid border border-dark rounded p-4">
-    <div>
-        <Header title={"CONVENIENT"}/>
-    </div>
-    <div className="pl-4">
+<div className="container-fluid ">
+<NavBar pageInfo={"Meeting Request"}/>
+
+    <div className="pl-4" id='meeting_content'>
         <div className="pl-4 col-md-5">
             <h2 className="p-4">Meeting Request</h2>
 
