@@ -157,38 +157,41 @@ export default class OrganiserInterface extends Component {
         // } else {
         return (
             <Fragment>
-                <NavBar pageInfo={"admin"} color={"dark"} />
+                <NavBar pageInfo={"Admin Panel"} color={"dark"} />
                 <Container >
                     <div id='meeting_content'>
-                        <div>
-                            <h1>Students’ Availability</h1>
-                        </div>
-                        <Row>
-                            {this.state.students.map((data, index) =>
-                                <Card className={moment() >= moment(data.start_timestamp) ? 'cardsAvailable cardInactive' : "cardsAvailable"} key={index} >
+                        <Col className="mentorsSection">
+                            <div>
+                                <h1>Students’ Availability</h1>
+                            </div>
+                            <Row>
+                                {this.state.students.map((data, index) =>
+                                    <Card className={moment() >= moment(data.start_timestamp) ? 'cardsAvailable cardInactive' : "cardsAvailable"} key={index} >
 
-                                    <CardTitle>
-                                        {data.github_username}
-                                    </CardTitle>
-                                    <img id='cardImageStudent' src={data.github_avatar_url} alt='picture profile' />
-                                    <CardText>
+                                        <CardTitle>
+                                            {data.github_username}
+                                        </CardTitle>
+                                        <img id='cardImageStudent' src={data.github_avatar_url} alt='picture profile' />
+                                        <CardText>
 
-                                        available times :
-                                    <p className="timestamps">
-                                            {moment(data.start_timestamp).format("dddd, Do MMMM  , hha")}
-                                        </p>
-                                        <p>{data.note}</p>
+                                            available times :
+                                        <p className="timestamps">
+                                                {moment(data.start_timestamp).format("dddd, Do MMMM  , hha")}
+                                            </p>
+                                            <p>{data.note}</p>
 
-                                    </CardText>
-                                    <Button onClick={this.handleDeleteSlot} value={data.slot_id}>Delete the slot</Button>
+                                        </CardText>
+                                        <Button onClick={this.handleDeleteSlot} value={data.slot_id}>Delete the slot</Button>
 
-                                </Card>
-                            )}
-                        </Row>
+                                    </Card>
+                                )}
+                            </Row>
+                        </Col>
+
                         <Col className="mentorsSection">
                             <hr />
                             <div>
-                                <h1> Mentors’ Availability</h1>
+                                <h1>Mentors’ Availability</h1>
                             </div>
                             <Row>
                                 {this.state.mentors.map((mentor, index) =>
@@ -198,9 +201,9 @@ export default class OrganiserInterface extends Component {
                                         </CardTitle>
                                         <img id='cardImageStudent' src={mentor.github_avatar_url} alt="picture profile" />
                                         <CardText>
-                                            available times :  {moment(mentor.start_timestamp).format("dddd, MMMM Do , hh,a")}
+                                            {moment(mentor.start_timestamp).format("dddd Do MMMM, ha")}
                                         </CardText>
-                                        <Button onClick={this.handleDeleteSlot} value={mentor.slot_id}>Delete the slot</Button>
+                                        <Button onClick={this.handleDeleteSlot} value={mentor.slot_id}>Remove</Button>
 
                                     </Card>
                                 )}
@@ -213,7 +216,7 @@ export default class OrganiserInterface extends Component {
                                 <h1>Upcoming Meetings</h1>
                             </div>
                             <div>
-                                <Button onClick={this.runMatchMaking}>run the match making process</Button>
+                                <br /><Button onClick={this.runMatchMaking}>Run Matchmaking Process</Button>
                             </div>
                             <Row >
                                 {this.state.match.map(first =>
@@ -225,13 +228,13 @@ export default class OrganiserInterface extends Component {
                                         <img src={first[0].github_avatar_url} id='cardImageStudent' />
 
                                         <CardText>
-                                            Sudent: <span className="matchStudent" >{first[1].github_username}</span> match with mentor: <span className="matchStudent" >{first[0].github_username}</span>
+                                            Student: <span className="matchStudent" >{first[1].github_username}</span> meeting with: <span className="matchStudent" >{first[0].github_username}</span>
                                         </CardText>
                                         <img src={first[1].github_avatar_url} id='cardImageStudent' />
                                         <CardText className="timestamps" >
-                                            available times : <span className="matchStudent" > {moment(first[0].start_timestamp).format("dddd, MMMM Do , hh,a")}</span>
+                                            <span className="matchStudent" > {moment(first[0].start_timestamp).format("dddd, Do MMMM  , hha")}</span>
                                         </CardText>
-                                        <Button onClick={(e) => this.handeEmail(first[1].github_email, first[0].github_email, moment(first[0].start_timestamp).format("dddd, MMMM Do , hh,a"), first[1].note)} >send email</Button>
+                                        <Button onClick={(e) => this.handeEmail(first[1].github_email, first[0].github_email, moment(first[0].start_timestamp).format("dddd Do MMMM, ha"), first[1].note)} >Re-send email</Button>
 
                                     </Card>
 

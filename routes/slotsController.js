@@ -14,7 +14,8 @@ exports.getAllSlots = router.get('/api/getslots', (req, res) => {
         }
         const querys = await db.query(`SELECT * FROM slots
                                         INNER JOIN users ON
-                                        (slots.user_id = users.user_id)`,
+                                        (slots.user_id = users.user_id)
+                                        ORDER BY slots.start_timestamp ASC`,
             (err, table) => {
                 if (err) {
                     console.log(err)

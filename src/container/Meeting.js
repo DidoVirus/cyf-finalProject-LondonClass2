@@ -34,9 +34,9 @@ class Meeting extends Component {
     }
     getSlots = () => {
       if(this.state.value === ""){
-        alert('PLEASE FILL IN THE TEXT AND ALSO SELECT THE SLOTS TO CONTINUE!')
+        alert('Please select at least one slot to continue')
       }else if (this.state.collectedData.length === 0){
-        alert('PLEASE FILL IN THE TEXT AND ALSO SELECT THE SLOTS TO CONTINUE!')
+        alert('Please select at least one slot to continue')
       }else{
         console.log('hi')
           fetch('http://localhost:2500/api/slots', {
@@ -90,7 +90,7 @@ render () {
                 <div className="submit pb-5">
                 
                     <NavLink to="/Displayslots">
-                    <Button  onClick={ this.getSlots} color="primary" block disabled={(this.state.value === "" || this.state.collectedData.length===0) ? true : false}>Submit</Button>
+                    <Button onClick={ this.getSlots} color="primary" block disabled={(this.state.value === "" || this.state.collectedData.length===0) ? true : false}>Save</Button>
                   </NavLink>
                 </div>
             </div>
