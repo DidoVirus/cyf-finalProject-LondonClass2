@@ -13,6 +13,7 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
+SET TIME ZONE 'GMT'
 
 --
 -- Name: convenient_db; Type: DATABASE; Schema: -; Owner: -
@@ -104,6 +105,13 @@ CREATE TABLE verification_codes (
     role_student boolean,
     role_mentor boolean,
     role_organiser boolean
+);
+CREATE TABLE convenient_availability (
+    slot_id serial NOT NULL,
+    mentor_slot_id integer,
+    student_slot_id integer,
+    convenient_time timestamp without time zone,
+    student_note text
 );
 
 

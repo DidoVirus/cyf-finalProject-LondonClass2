@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Col , Row} from 'reactstrap'
@@ -5,6 +6,7 @@ import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import { NavLink} from 'react-router-dom';
 import Image from "../components/Image.js";
+import NavBar from '../components/NavBar'
 import moment from 'moment'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap';
 const now = moment().format()
@@ -63,15 +65,14 @@ deleteSlots= async(e) =>{
 render(){
   return(
     <div className="pl-5">
-        <div>
-            <Header title={"CONVIENT" }/>
-        </div>
+    
+        <NavBar pageInfo={"Booked Availability"}/>
         <div className="pl-5">
             <div className="xpl-4">
-                <h2 className="p-4">BOOKED AVAILABILITY</h2>
+                <h2 className="p-4"></h2>
                 <div className="center">
-                    <Image />
-
+                    {/* <Image /> */}
+                    {/* <img src={} */}
                 </div>
 
                 <p className="p-4">HERE YOUR UPCOMING AVAILABILITY</p>

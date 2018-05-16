@@ -1,3 +1,26 @@
+body * {
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.title{
+  font-size: 4em;
+ color: #007bff
+}
+.subtitle{
+  font-size: 1.4em;
+  margin: 20px
+}
+.subheading{
+  margin-top:20px 
+}
+.login{
+  margin-top: 100px;
+  margin-bottom: 180px
+}
+.h-3{
+  margin-bottom: 10px
+}
 #cardImageStudent{
     width: 130px;
     height: auto;
@@ -79,4 +102,17 @@
   }
   #meeting_content{
     margin-top: 40px
+  }
+  .logo{
+    width:20%
+  }
+  @media only screen and (max-width: 360px) {
+    .logo{
+      margin-top:20px;
+      width:60%
+    }
+    .login{
+      margin-top: 100px;
+      margin-bottom: 160px
+    }
   }

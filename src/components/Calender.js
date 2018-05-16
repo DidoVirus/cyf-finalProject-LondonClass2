@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Button from "./Button.js";
 import CalenderButton from "./CalenderButton.js";
 import moment from "moment";
+moment.locale('en-GB')
+
 class Calender extends Component {
     constructor(props) {
         super(props);
@@ -59,7 +61,7 @@ class Calender extends Component {
           this.props.getData(this.state.collectData);
     }
     render() {
-      console.log("am them",this.state.slots  )
+      console.log("am them",this.state.collectData)
         var day1 = moment().format("DD/MM/YYYY");
         var day2 = moment().add(1, 'days').format("DD/MM/YYYY");
         var day3 = moment().add(2, 'days').format("DD/MM/YYYY");
@@ -92,16 +94,16 @@ class Calender extends Component {
                         return <tr>
                             <td className="periodOfDay" scope="row">{this.period(time)}</td>
                             {dayInTheWeek.map((day) => {
-                                return <th><CalenderButton bookedDays={this.bookedDays} bookedSlots={this.state.slots}  day={day} value={time} booked={false} dataStamps = {this.state.collectData} /></th>;
+                                return <th><CalenderButton bookedDays={this.bookedDays} day={day} value={time} booked={false} selectedTime = {this.state.slots} /></th>;
                             })}
                         </tr>
                     })}
                 </thead>
-                <tbody>
+                <tbody> 
 
                 </tbody>
             </table>
         );
     }
 }
-export default Calender;
+export default Calender

@@ -12,19 +12,25 @@ class Home extends Component {
 render () {
 return (
 <div className="container-fluid">
-    <div>
-        <Header title={"CONVENIENT"}/>
+<div className="text-center">
+    <img src="./asset/CYFlogo.png" alt="logo" className='logo'/>
+</div>
+    <div className="text-center">
+        {/* <Header title={"CONVENIENT"}/> */}
+        <h1 className='title' >CONVENIENT</h1>
+        <h2 className="subheading">Mentor Meeting Booking System</h2>
+        <p className='subtitle'>Book a meeting with a mentor using the Convenient booking system. Get started by logging in below.</p>
+
     </div>
-    <div className="p-3">
-        <Image />
-    </div>
+
     <div className="p-4">
-        <div className="row">
-            <Login  message={"LOGIN"} button={"Sign in with GitHub"} link={"http://localhost:2500/auth/github"} />
-            <Login message={"NEED ANY HELP?"} button={"Contact Organiser"} link={"http://localhost:3000/Organiser"}/>
+        <div className="row login">
+            <Login  message={"Login"} button={"Sign in with GitHub"}  />
+            <Login message={"Need help?"} button={"Contact Organiser"} onClick={this.signup} />
         </div>
+        <hr />
     </div>
-    <div>
+    <div className='foot'>
         <Footer />
     </div>
 </div>

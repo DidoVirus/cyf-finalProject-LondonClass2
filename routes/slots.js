@@ -8,6 +8,7 @@ var moment = require('moment');
 moment.locale('en-GB')
 
 
+
 // calculate the beginning and ending of the week
 const weekStart = moment().add(1,'w').startOf('week')
 const weekEnd = moment().add(1,'w').endOf('week')

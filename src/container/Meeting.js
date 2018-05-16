@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import {Button} from 'reactstrap'
 import ReactDOM from 'react-dom';
 import Calender from "../components/Calender.js";
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
-import Button from "../components/Button.js";
+// import Button from "../components/Button.js";
 import NavBar from '../components/NavBar'
 import { Form, FormControl } from 'react-bootstrap';
 import { NavLink} from 'react-router-dom';
@@ -34,7 +35,7 @@ class Meeting extends Component {
     getSlots = () => {
       if(this.state.value === ""){
         alert('PLEASE FILL IN THE TEXT AND ALSO SELECT THE SLOTS TO CONTINUE!')
-      }else if (this.state.collectedData === undefined){
+      }else if (this.state.collectedData.length === 0){
         alert('PLEASE FILL IN THE TEXT AND ALSO SELECT THE SLOTS TO CONTINUE!')
       }else{
         console.log('hi')
@@ -66,6 +67,7 @@ class Meeting extends Component {
   }
 render () {
   console.log(this.state.collectData)
+  var undi = undefined
     return (
 <div className="container-fluid ">
 <NavBar pageInfo={"Meeting Request"}/>
@@ -86,9 +88,10 @@ render () {
                     <Calender getData={ this.getData }/>
                 </div>
                 <div className="submit pb-5">
-                    {/* <NavLink to="/Displayslots"> */}
-                    <Button  onClick={ this.getSlots} button={"SUBMIT"} />
-                  {/* </NavLink> */}
+                
+                    <NavLink to="/Displayslots">
+                    <Button  onClick={ this.getSlots} color="primary" block disabled={(this.state.value === "" || this.state.collectedData.length===0) ? true : false}>Submit</Button>
+                  </NavLink>
                 </div>
             </div>
         </div>
