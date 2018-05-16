@@ -138,3 +138,15 @@ body * {
   .calendar-table th {
     text-align: center;
   }
+
+  .verification-code {
+    padding: 5px;
+    font-size: 1.2em;
+    width: 150px;
+  }
+
+  .verification-label {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-right: 10px;
+  }

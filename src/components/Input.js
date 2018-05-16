@@ -16,7 +16,7 @@ handleInput = (e) => {
 render(){
     return(
       <form action="http://localhost:2500/auth/verif" method="post">
-        <input type="text" name="id" /><br/><br/>
+        <span className="verification-label">Code:</span> <input type="text" name="id" className="verification-code" /><br/><br/>
         <button className="btn btn-primary btn-lg mx-auto" type="submit">Submit</button>
       </form>
 

@@ -12,13 +12,12 @@ function Activation(){
 return (
 <div className="container-fluid border border-dark rounded p-2">
     <div>
-        <Header title={"CONVIENT"}/>
+        <Header title={"CONVENIENT"}/>
     </div>
     <div className="pl-5">
         <div className="pl-4">
-            <h2 className="p-4">VERIFICATION</h2>
-            <p className="p-4">Please enter your verification code to complete your registration.if you haven't been given a code yet.</p>
-            <a className="text-primary pl-4">please contact the organisers.</a>
+            <h2 className="p-4">Verification</h2>
+            <p className="p-4">Please enter your verification code to complete your registration. If you haven't been given a code yet, please <a href="">contact us.</a></p>
         </div>
         <div className="p-4 form-group col-md-4 input">
             <Input />
