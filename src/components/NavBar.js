@@ -11,11 +11,13 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem } from 'reactstrap';
-  
+    import LogOutButton from './logOutButton.js'
+
+
   export default class NavBar extends Component {
     constructor(props) {
       super(props);
-  
+
       this.state = {
         isOpen: false
       };
@@ -42,6 +44,9 @@ import {
                 </NavItem>
                 <NavItem>
                   <NavLink href="/admin">Admin Panel</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/"><LogOutButton /></NavLink>
                 </NavItem>
               </Nav>
             </Collapse>

@@ -65,7 +65,7 @@ deleteSlots= async(e) =>{
 render(){
   return(
     <div className="pl-5">
-    
+
         <NavBar pageInfo={"Dashboard"}/>
         <div className="pl-5">
             <div className="xpl-4">
