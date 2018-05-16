@@ -78,7 +78,7 @@ render(){
                 <p className="p-4">Welcome! Your booked meetings and availability will be shown below.</p>
               <div className="p-4">
                 <Row >
-                <h3>Your availability in next 2 weeks</h3>
+                <h3>Upcoming Availability</h3>
                 {this.state.slots.map(time => moment(time.start_timestamp).format() > now ?
                 <Col>
                   <Button className='timeSlot' color="primary" size="lg" onClick={this.deleteSlots} value={time.slot_id}> {moment(time.start_timestamp).format("dddd Do MMMM, ha")} </Button>

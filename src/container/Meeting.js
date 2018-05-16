@@ -70,21 +70,23 @@ render () {
   var undi = undefined
     return (
 <div className="container-fluid ">
-<NavBar pageInfo={"Meeting Request"}/>
+<NavBar pageInfo={"Request Meeting"}/>
 
     <div className="pl-4" id='meeting_content'>
-        <div className="pl-4 col-md-5">
-            <h2 className="p-4">Meeting Request</h2>
+        <div className="">
+            <h2 className="p-4">Request Meeting</h2>
 
+            <p className="p-4">To request a meeting, enter a topic of discussion and select the slots in which you're available.</p>
 
-            <p className="pl-4">What Would Like To Discuss?</p>
+            <h4 className="pl-4">What would you like to discuss?</h4>
             <div className="pl-4">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={this.state.value} onChange={this.handleChange}/>
+              <textarea class="form-control" className="pl-4" id="meeting-subject" rows="3" cols="50" value={this.state.value} onChange={this.handleChange}/>
             </div>
         </div>
         <div className="pl-4">
             <div className="p-4">
                 <div className="row">
+                <h4>Select time slots</h4>
                     <Calender getData={ this.getData }/>
                 </div>
                 <div className="submit pb-5">

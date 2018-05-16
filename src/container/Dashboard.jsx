@@ -13,7 +13,7 @@ return (
     </div>
     <div className="pl-5">
         <div className="pl-4">
-            <h2 className="p-4">DASHBOARD</h2>
+            <h2 className="p-4">Dashboard</h2>
             <p className="p-4">At present, you have no upcoming meetings scheduled</p>
         </div>
         <div className="col-md-5 submit pb-5">
