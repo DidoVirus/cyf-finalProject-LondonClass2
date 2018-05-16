@@ -35,13 +35,13 @@ import {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="/admin">Admin</NavLink>
+                  <NavLink href="/Displayslots">Dashboard</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/meeting">mark availability</NavLink>
+                  <NavLink href="/meeting">Book Meeting</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/Displayslots">display slots</NavLink>
+                  <NavLink href="/admin">Admin Panel</NavLink>
                 </NavItem>
               </Nav>
             </Collapse>

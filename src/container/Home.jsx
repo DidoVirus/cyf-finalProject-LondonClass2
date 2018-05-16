@@ -12,7 +12,7 @@ class Home extends Component {
 render () {
 return (
 <div className="container-fluid">
-<div className="text-center">
+<div className="text-center cyf-logo">
     <img src="./asset/CYFlogo.png" alt="logo" className='logo'/>
 </div>
     <div className="text-center">
@@ -25,7 +25,7 @@ return (
 
     <div className="p-4">
         <div className="row login">
-            <Login  message={"Login"} button={"Sign in with GitHub"}  />
+            <Login message={"Login"} button={"Sign in with GitHub"}  />
             <Login message={"Need help?"} button={"Contact Organiser"} onClick={this.signup} />
         </div>
         <hr />

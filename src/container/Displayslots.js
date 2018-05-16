@@ -43,7 +43,7 @@ getSlots = async () =>{
 }
 
 deleteSlots= async(e) =>{
-  var conf = window.confirm('are you sure you want to delete this slot')
+  var conf = window.confirm('Are you sure you want to delete this slot?')
   if (conf == true) {
       let slotId = e.target.value
       const fetchDelet = await fetch('http://localhost:2500/api/delslots', {
@@ -66,7 +66,7 @@ render(){
   return(
     <div className="pl-5">
     
-        <NavBar pageInfo={"Booked Availability"}/>
+        <NavBar pageInfo={"Dashboard"}/>
         <div className="pl-5">
             <div className="xpl-4">
                 <h2 className="p-4"></h2>
@@ -75,7 +75,7 @@ render(){
                     {/* <img src={} */}
                 </div>
 
-                <p className="p-4">HERE YOUR UPCOMING AVAILABILITY</p>
+                <p className="p-4">Welcome! Your booked meetings and availability will be shown below.</p>
               <div className="p-4">
                 <Row >
                 {this.state.slots.map(time => moment(time.start_timestamp).format() > now ?
@@ -92,7 +92,7 @@ render(){
 
             <div className="pl-5">
             <Col>
-             <a className="col btn btn-primary mx-auto" href="http://localhost:2500/auth/meeting">BOOK MEETING</a>
+             <a className="col btn btn-primary mx-auto home-button" href="http://localhost:2500/auth/meeting">Book Meeting</a>
            </Col>
            </div>
 
