@@ -16,4 +16,4 @@ The most intelligent matchmaking system for mentors and students that maximises 
 2. Go to the `database` folder
 3. Run the command: `pg_dump -sC --no-owner convenient_db > db.sql`
 
-## Installation Instructions
+
